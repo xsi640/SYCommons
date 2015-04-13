@@ -2,6 +2,11 @@ package com.poreader.common;
 
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * 密码工具类
+ * @author Yang
+ *
+ */
 public class CryptoUtils {
 	private static int saltSize = 32;
 	private static int iterations = 1000;

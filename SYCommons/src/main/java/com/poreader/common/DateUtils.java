@@ -5,8 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 日期工具类
+ * @author Yang
+ *
+ */
 public class DateUtils {
 
+	/**
+	 * 空白日期，定义为1900-1-1
+	 */
 	public final static Date Date_EMPTY = new Date() {
 
 		private static final long serialVersionUID = 8729434191329587401L;
@@ -19,6 +27,13 @@ public class DateUtils {
 		}
 	};
 
+	/**
+	 * 字符串转Date类型
+	 * @param str
+	 * @param defaultVal
+	 * @param pattern
+	 * @return
+	 */
 	public static Date formString(String str, Date defaultVal, String pattern) {
 		Date result = defaultVal;
 		if (pattern == null || pattern.isEmpty())

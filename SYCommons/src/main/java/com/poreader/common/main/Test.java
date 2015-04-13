@@ -1,19 +1,23 @@
 package com.poreader.common.main;
 
-import com.poreader.common.cache.StandardHotCache;
+import java.util.concurrent.Callable;
+
+import com.poreader.common.Ref;
+import com.poreader.common.ThreadUtils;
 
 public class Test {
 	public static void main(String[] args) {
-		StandardHotCache<String, String> cache = new StandardHotCache<String, String>();
-		cache.setDetectSpanInSecs(1);
-		cache.setMaxMuteSpanInSecs(10);
-		cache.initialize();
-		cache.add("1", "suyang");
+		Ref<String> s = new Ref<String>();
+		ThreadUtils.run(new Callable<String>() {
+			public String call() throws Exception {
+				return "abc";
+			}
+		}, s);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println(cache.get("1"));
+		System.out.println(s.getValue());
 	}
 }
