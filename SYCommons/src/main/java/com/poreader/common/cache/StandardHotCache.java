@@ -71,16 +71,18 @@ public class StandardHotCache<TKey, TValue> implements HotCache<TKey, TValue>, R
 	}
 
 	public void run() {
-		long now = System.currentTimeMillis();
-		List<TKey> keyLists = new ArrayList<TKey>();
-		for (CachePackage<TKey, TValue> item : hashtable.values()) {
-			long time = now - item.getLastAccessTime();
-			if (time > this.maxMuteSpanInSecs * 1000) {
-				keyLists.add(item.getKey());
+		synchronized (hashtable) {
+			long now = System.currentTimeMillis();
+			List<TKey> keyLists = new ArrayList<TKey>();
+			for (CachePackage<TKey, TValue> item : hashtable.values()) {
+				long time = now - item.getLastAccessTime();
+				if (time > this.maxMuteSpanInSecs * 1000) {
+					keyLists.add(item.getKey());
+				}
 			}
-		}
-		for (TKey key : keyLists) {
-			hashtable.remove(key);
+			for (TKey key : keyLists) {
+				hashtable.remove(key);
+			}
 		}
 	}
 
