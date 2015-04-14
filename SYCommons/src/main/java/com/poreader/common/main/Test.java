@@ -1,23 +1,19 @@
 package com.poreader.common.main;
 
-import java.util.concurrent.Callable;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import com.poreader.common.Ref;
-import com.poreader.common.ThreadUtils;
+import com.poreader.common.HttpUtils;
+import com.poreader.common.NameValueCollection;
 
 public class Test {
 	public static void main(String[] args) {
-		Ref<String> s = new Ref<String>();
-		ThreadUtils.run(new Callable<String>() {
-			public String call() throws Exception {
-				return "abc";
-			}
-		}, s);
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println(s.getValue());
+		NameValueCollection nvc = new NameValueCollection();
+		nvc.put("a", "123");
+		System.out.println(HttpUtils.getContent("http://www.baidu.com", nvc, "get"));
 	}
 }

@@ -19,11 +19,9 @@ public class SerializeUtils {
 		String dir = IOUtils.getDirectory(path);
 		IOUtils.createDirectory(dir);
 
-		FileOutputStream stream = null;
 		ObjectOutputStream out = null;
 		try {
-			stream = new FileOutputStream(path);
-			out = new ObjectOutputStream(stream);
+			out = new ObjectOutputStream(new FileOutputStream(path));
 			out.writeObject(obj);
 			out.flush();
 		} catch (FileNotFoundException e) {
@@ -38,13 +36,6 @@ public class SerializeUtils {
 					e.printStackTrace();
 				}
 			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
@@ -54,11 +45,9 @@ public class SerializeUtils {
 		if (!IOUtils.isFile(path))
 			return result;
 
-		FileInputStream stream = null;
 		ObjectInputStream in = null;
 		try {
-			stream = new FileInputStream(path);
-			in = new ObjectInputStream(stream);
+			in = new ObjectInputStream(new FileInputStream(path));
 			result = (T) in.readObject();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -70,13 +59,6 @@ public class SerializeUtils {
 			if (in != null) {
 				try {
 					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -94,7 +76,7 @@ public class SerializeUtils {
 		ObjectOutputStream out = null;
 		try {
 			stream = new ByteArrayOutputStream();
-			out = new ObjectOutputStream(out);
+			out = new ObjectOutputStream(stream);
 			out.writeObject(obj);
 			result = stream.toByteArray();
 		} catch (IOException e) {
@@ -124,11 +106,9 @@ public class SerializeUtils {
 		if (data == null || data.length == 0)
 			return result;
 
-		ByteArrayInputStream stream = null;
 		ObjectInputStream in = null;
 		try {
-			stream = new ByteArrayInputStream(data);
-			in = new ObjectInputStream(stream);
+			in = new ObjectInputStream(new ByteArrayInputStream(data));
 			result = (T) in.readObject();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -138,13 +118,6 @@ public class SerializeUtils {
 			if (in != null) {
 				try {
 					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -161,11 +134,9 @@ public class SerializeUtils {
 		String dir = IOUtils.getDirectory(path);
 		IOUtils.createDirectory(dir);
 
-		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		try {
-			stream = new FileOutputStream(path);
-			encoder = new XMLEncoder(stream);
+			encoder = new XMLEncoder(new FileOutputStream(path));
 			encoder.writeObject(obj);
 			encoder.flush();
 		} catch (FileNotFoundException e) {
@@ -173,13 +144,6 @@ public class SerializeUtils {
 		} finally {
 			if (encoder != null) {
 				encoder.close();
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -190,24 +154,15 @@ public class SerializeUtils {
 		if (!IOUtils.isFile(path))
 			return result;
 
-		FileInputStream stream = null;
 		XMLDecoder decoder = null;
 		try {
-			stream = new FileInputStream(path);
-			decoder = new XMLDecoder(stream);
+			decoder = new XMLDecoder(new FileInputStream(path));
 			result = (T) decoder.readObject();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (decoder != null) {
 				decoder.close();
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		return result;

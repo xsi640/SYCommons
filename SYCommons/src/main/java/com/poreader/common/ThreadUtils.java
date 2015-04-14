@@ -8,7 +8,7 @@ public class ThreadUtils {
 		run(runnable, null, 0);
 	}
 
-	public static void delayRun(final Runnable runnable, final long milliseconds) {
+	public static void run(final Runnable runnable, final long milliseconds) {
 		run(runnable, null, milliseconds);
 	}
 

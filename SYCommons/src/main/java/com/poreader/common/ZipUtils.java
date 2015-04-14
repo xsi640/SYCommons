@@ -34,12 +34,10 @@ public class ZipUtils {
 		String zipDir = IOUtils.getDirectory(zipPath);
 		IOUtils.createDirectory(zipDir);
 
-		FileOutputStream fileStream = null;
 		ZipOutputStream zipStream = null;
 
 		try {
-			fileStream = new FileOutputStream(zipPath);
-			zipStream = new ZipOutputStream(fileStream);
+			zipStream = new ZipOutputStream(new FileOutputStream(zipPath));
 			zipStream.setLevel(COMPRESS_LEVEL);
 			for (File f : fileLists) {
 				String name = "";
@@ -85,13 +83,6 @@ public class ZipUtils {
 					e.printStackTrace();
 				}
 			}
-			if (fileStream != null) {
-				try {
-					fileStream.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
@@ -102,11 +93,9 @@ public class ZipUtils {
 		String dir = IOUtils.getDirectory(targetPath);
 		IOUtils.createDirectory(dir);
 
-		FileInputStream stream = null;
 		ZipInputStream zip = null;
 		try {
-			stream = new FileInputStream(zipPath);
-			zip = new ZipInputStream(stream);
+			zip = new ZipInputStream(new FileInputStream(zipPath));
 			ZipEntry ze = null;
 
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -150,13 +139,6 @@ public class ZipUtils {
 				}
 				try {
 					zip.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
