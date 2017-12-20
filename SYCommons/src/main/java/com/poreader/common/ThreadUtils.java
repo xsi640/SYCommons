@@ -34,7 +34,7 @@ public class ThreadUtils {
 				}
 			}
 		});
-		thread.run();
+		thread.start();
 	}
 
 	public static <T> void run(final Callable<T> callable, final Ref<T> ref) {
