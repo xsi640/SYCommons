@@ -1,7 +1,5 @@
 package com.poreader.common;
 
-import java.nio.ByteBuffer;
-
 public class CompatibleUtils {
 	/**
 	 * 将由c#语言的int转成的字节数组转换成int
