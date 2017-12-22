@@ -47,6 +47,12 @@ public class DateUtils {
 		return result;
 	}
 
+	/**
+	 * 按指定日期类型转换成字符串
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
 	public static String toString(Date date, String pattern) {
 		if (pattern == null || pattern.isEmpty())
 			pattern = "yyyy-MM-dd HH:mm:ss";
