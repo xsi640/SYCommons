@@ -10,6 +10,17 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.X509TrustManager;
+
+import org.apache.commons.lang.StringUtils;
 
 public class HttpUtils {
 
@@ -191,7 +202,7 @@ public class HttpUtils {
 		}
 	}
 
-	private static HttpURLConnection getConnection(String url, NameValueCollection nvc, Method method)
+	public static HttpURLConnection getConnection(String url, NameValueCollection nvc, Method method)
 			throws IOException {
 		HttpURLConnection result = null;
 		if (method == Method.POST) {
@@ -209,7 +220,7 @@ public class HttpUtils {
 		return result;
 	}
 
-	private static InputStream getInputStream(HttpURLConnection conn, NameValueCollection nvc, Method method)
+	public static InputStream getInputStream(HttpURLConnection conn, NameValueCollection nvc, Method method)
 			throws IOException {
 		if (method == Method.POST) {
 			conn.setDoInput(true);
@@ -225,5 +236,54 @@ public class HttpUtils {
 			}
 		}
 		return conn.getInputStream();
+	}
+	
+	public static String getRedirectUrl(String url) throws IOException {
+		HttpURLConnection.setFollowRedirects(false);
+		URL obj = new URL(url);
+		HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+		conn.setReadTimeout(5000);
+		conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
+		conn.addRequestProperty("User-Agent", "Mozilla");
+		conn.addRequestProperty("Referer", "google.com");
+		boolean redirect = false;
+		int status = conn.getResponseCode();
+		if (status != HttpURLConnection.HTTP_OK) {
+			if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM
+					|| status == HttpURLConnection.HTTP_SEE_OTHER)
+				redirect = true;
+		}
+		if (redirect) {
+			String newUrl = conn.getHeaderField("Location");
+			if (!StringUtils.isEmpty(newUrl)) {
+				return newUrl;
+			}
+		}
+		return url;
+	}
+	
+	public static void trustHttpsEveryone() {
+		try {
+			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+				public boolean verify(String hostname, SSLSession session) {
+					return true;
+				}
+			});
+
+			SSLContext context = SSLContext.getInstance("TLS");
+			context.init(null, new X509TrustManager[] { new X509TrustManager() {
+				public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+				}
+
+				public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+				}
+
+				public X509Certificate[] getAcceptedIssuers() {
+					return new X509Certificate[0];
+				}
+			} }, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
+		} catch (Exception e) {
+		}
 	}
 }
