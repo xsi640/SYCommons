@@ -207,6 +207,9 @@ public class HttpUtils {
 		HttpURLConnection result = null;
 		if (method == Method.POST) {
 			URL u = new URL(url);
+			if(u.getProtocol().equalsIgnoreCase("https")) {
+				trustHttpsEveryone();
+			}
 			result = (HttpURLConnection) u.openConnection();
 			result.setRequestMethod("POST");
 		} else {
@@ -240,8 +243,11 @@ public class HttpUtils {
 	
 	public static String getRedirectUrl(String url) throws IOException {
 		HttpURLConnection.setFollowRedirects(false);
-		URL obj = new URL(url);
-		HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+		URL u = new URL(url);
+		HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+		if(u.getProtocol().equalsIgnoreCase("https")) {
+			trustHttpsEveryone();
+		}
 		conn.setReadTimeout(5000);
 		conn.addRequestProperty("Accept-Language", "en-US,en;q=0.8");
 		conn.addRequestProperty("User-Agent", "Mozilla");
