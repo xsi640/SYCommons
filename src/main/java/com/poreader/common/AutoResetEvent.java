@@ -20,7 +20,6 @@ public final class AutoResetEvent {
 	public AutoResetEvent(boolean signalled) {
 		event = new Semaphore(signalled ? 1 : 0);
 		mutex = new Integer(-1);
-
 	}
 
 	/**
