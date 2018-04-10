@@ -38,7 +38,7 @@ public class EncodingUtils {
 	public static String urlEncode(String url) {
 		String result = "";
 		try {
-			result = URLEncoder.encode(url, DEFAULT_CHARSET_STR);
+			result = URLEncoder.encode(url, DEFAULT_CHARSET_STR).replace("\\+","%20");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -48,7 +48,7 @@ public class EncodingUtils {
 	public static String urlDecode(String url) {
 		String result = "";
 		try {
-			result = URLDecoder.decode(url, DEFAULT_CHARSET_STR);
+			result = URLDecoder.decode(url.replace("%20", "\\+"), DEFAULT_CHARSET_STR);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
