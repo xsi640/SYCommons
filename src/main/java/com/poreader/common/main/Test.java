@@ -1,6 +1,6 @@
 package com.poreader.common.main;
 
 public class Test {
-	public static void main(String[] args) throws InterruptedException {
-	}
+    public static void main(String[] args) {
+    }
 }

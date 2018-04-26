@@ -1,5 +1,10 @@
 package com.poreader.common.cache;
 
+/**
+ * 缓存封装包
+ * @param <TKey> 缓存Key
+ * @param <TValue> 缓存Value
+ */
 public class CachePackage<TKey, TValue> {
 	private TKey key;
 	private TValue value;

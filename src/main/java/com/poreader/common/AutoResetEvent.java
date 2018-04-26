@@ -15,7 +15,7 @@ public final class AutoResetEvent {
 
 	/**
 	 *  
-	 * @param  true 若要将初始状态设置为终止状态; false 将初始状态设置为非终止。
+	 * @param  signalled 若要将初始状态设置为终止状态; false 将初始状态设置为非终止。
 	 */
 	public AutoResetEvent(boolean signalled) {
 		event = new Semaphore(signalled ? 1 : 0);
@@ -50,8 +50,8 @@ public final class AutoResetEvent {
 
 	/**
 	 * 阻止当前线程，直到当前 WaitHandle 收到信号。
-	 * @param 表示等待的时间
-	 * @param 表示等待的时间单位
+	 * @param timeout 表示等待的时间
+	 * @param unit 表示等待的时间单位
 	 * @return
 	 */
 	public boolean waitOne(int timeout, TimeUnit unit) {
@@ -65,7 +65,7 @@ public final class AutoResetEvent {
 	
 	/**
 	 * 阻止当前线程，直到当前 WaitHandle 收到信号。
-	 * @param 表示等待的时间（单位：毫秒）
+	 * @param timeout 表示等待的时间（单位：毫秒）
 	 * @return
 	 */
 	public boolean waitOne(int timeout) {

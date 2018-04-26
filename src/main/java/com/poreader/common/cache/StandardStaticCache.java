@@ -1,34 +1,37 @@
 package com.poreader.common.cache;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
 
+/**
+ * 标准静态缓存
+ * @param <TKey>
+ * @param <TValue>
+ */
 public class StandardStaticCache<TKey, TValue> implements StaticCache<TKey, TValue> {
 
-	private Hashtable<TKey, TValue> hashtable = new Hashtable<TKey, TValue>();
+	private Map<TKey, TValue> cache = Collections.synchronizedMap(new HashMap<>());
 
 	public int size() {
-		return hashtable.size();
+		return cache.size();
 	}
 
 	public List<TValue> all() {
-		return new ArrayList<TValue>(hashtable.values());
+		return new ArrayList<TValue>(cache.values());
 	}
 
 	public void add(TKey key, TValue value) {
-		hashtable.put(key, value);
+		cache.put(key, value);
 	}
 
 	public void remove(TKey key) {
-		hashtable.remove(key);
+		cache.remove(key);
 	}
 
 	public TValue get(TKey key) {
-		return hashtable.get(key);
+		return cache.get(key);
 	}
 
 	public void clear(){
-		hashtable.clear();
+		cache.clear();
 	}
 }

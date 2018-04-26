@@ -193,6 +193,10 @@ public class TypeParse {
 		return toDate(str, DateUtils.Date_EMPTY);
 	}
 
+	public static Date toDate(String str, String pattern){
+		return DateUtils.formString(str, DateUtils.Date_EMPTY, pattern);
+	}
+
 	public static Date toDate(Object obj, Date defaultVal, String pattern) {
 		return toDate(obj.toString(), defaultVal, pattern);
 	}
