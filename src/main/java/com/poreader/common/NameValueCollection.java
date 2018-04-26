@@ -1,63 +1,113 @@
 package com.poreader.common;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+/**
+ * 减值的集合，主要用于描述http请求的参数
+ */
 public class NameValueCollection {
 
-	private Hashtable<String, List<String>> hashtable = new Hashtable<String, List<String>>();
+	private Map<String, List<String>> map = Collections.synchronizedMap(new HashMap<>());
 
+	/**
+	 * 获得集合大小
+	 * @return
+	 */
 	public int size() {
-		return hashtable.size();
+		return map.size();
 	}
 
+	/**
+	 * 集合是否为空
+	 * @return
+	 */
 	public boolean isEmpty() {
-		return hashtable.isEmpty();
+		return map.isEmpty();
 	}
 
+	/**
+	 * 集合是否存在某个Key
+	 * @param key
+	 * @return
+	 */
 	public boolean containsKey(Object key) {
-		return hashtable.containsKey(key);
+		return map.containsKey(key);
 	}
 
+	/**
+	 * 集合是否存在某个值
+	 * @param value
+	 * @return
+	 */
 	public boolean containsValue(Object value) {
-		return hashtable.containsValue(value);
+		return map.containsValue(value);
 	}
 
+	/**
+	 * 获取某个key的值
+	 * @param key
+	 * @return
+	 */
 	public String get(Object key) {
-		List<String> lists = hashtable.get(key);
+		List<String> lists = map.get(key);
 		if (lists == null || lists.size() == 0)
 			return "";
 		return CollectionUtils.toString(lists, ",");
 	}
 
+	/**
+	 * 设置key-value
+	 * @param key
+	 * @param value
+	 */
 	public void put(String key, String value) {
-		List<String> lists = hashtable.get(key);
+		List<String> lists = map.get(key);
 		if (lists == null) {
 			lists = new ArrayList<String>();
 			lists.add(value);
 		} else {
 			lists.add(value);
 		}
-		this.hashtable.put(key, lists);
+		this.map.put(key, lists);
 	}
 
+	/**
+	 * 移除
+	 * @param key
+	 */
 	public void remove(Object key) {
-		hashtable.remove(key);
+		map.remove(key);
 	}
 
+	/**
+	 * 清空
+	 */
 	public void clear() {
-		hashtable.clear();
+		map.clear();
 	}
 
+	/**
+	 * 获取所有Key
+	 * @return
+	 */
 	public Set<String> keySet() {
-		return hashtable.keySet();
+		return map.keySet();
 	}
 
-	public Collection<String> values() {
-		Collection<List<String>> collection = hashtable.values();
+	/**
+	 * 获取所有值
+	 * @return
+	 */
+	public Collection<List<String>> values(){
+		return map.values();
+	}
+
+	/**
+	 * 获取所有值（字符串形式）
+	 * @return
+	 */
+	public Collection<String> valuesAsString() {
+		Collection<List<String>> collection = map.values();
 		if (collection != null && collection.size() > 0) {
 			Collection<String> c = new ArrayList<String>(collection.size());
 			for (List<String> lists : collection) {
