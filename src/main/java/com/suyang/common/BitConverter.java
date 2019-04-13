@@ -1,5 +1,7 @@
 package com.suyang.common;
 
+import com.suyang.common.encode.EncodingUtils;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 

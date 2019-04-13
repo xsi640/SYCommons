@@ -112,7 +112,7 @@ public class StandardHotCache<TKey, TValue> implements HotCache<TKey, TValue>, R
     public void run() {
         long now = System.currentTimeMillis();
         List<TKey> keyLists = new ArrayList<TKey>();
-        Collection<CachePackage<TKey, TValue>> values = null;
+        Collection<CachePackage<TKey, TValue>> values;
         locker.readLock().lock();
         try {
             values = cache.values();

@@ -1,7 +1,8 @@
-package com.suyang.common;
+package com.suyang.common.secret;
 
 import java.nio.charset.Charset;
 
+import com.suyang.common.encode.EncodingUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 

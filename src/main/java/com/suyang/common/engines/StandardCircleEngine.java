@@ -1,6 +1,6 @@
 package com.suyang.common.engines;
 
-import com.suyang.common.ThreadUtils;
+import com.suyang.common.threads.ThreadUtils;
 
 public class StandardCircleEngine implements CircleEngine, Runnable {
 

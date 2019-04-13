@@ -1,5 +1,6 @@
-package com.suyang.common;
+package com.suyang.common.secret;
 
+import com.suyang.common.Rfc2898DeriveBytes;
 import org.apache.commons.codec.binary.Base64;
 
 /**

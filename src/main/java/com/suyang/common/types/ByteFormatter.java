@@ -1,4 +1,4 @@
-package com.suyang.common;
+package com.suyang.common.types;
 
 /**
  * 字节大小显示方式
@@ -26,7 +26,7 @@ public class ByteFormatter {
 	 * @return
 	 */
 	public static String toString(long size) {
-		String result = "";
+		String result;
 		if (size < KB) {
 			result = String.format(BFormatPattern, size);
 		} else if (size >= KB && size < MB) {
@@ -82,7 +82,7 @@ public class ByteFormatter {
 	 * @return
 	 */
 	public static ESizeType getSizeType(long size) {
-		ESizeType result = ESizeType.KB;
+		ESizeType result;
 		if (size < KB) {
 			result = ESizeType.B;
 		} else if (size >= KB && size < MB) {

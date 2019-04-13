@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.suyang.common.encode.EncodingUtils;
 import org.apache.commons.io.FilenameUtils;
 
 public class IOUtils {
@@ -88,19 +89,20 @@ public class IOUtils {
 
     /**
      * 删除指定文件
-     * @param path 文件路径
+     *
+     * @param path    文件路径
      * @param pattern 文件名称匹配的正则表达式
      */
     public static void delete(String path, String pattern) {
         File f = new File(path);
         if (f.exists()) {
             if (f.isFile()) {
-                if(Pattern.compile(pattern).matcher(f.getName()).find()){
+                if (Pattern.compile(pattern).matcher(f.getName()).find()) {
                     f.delete();
                 }
             } else {
                 File[] files = f.listFiles();
-                for(File file : files){
+                for (File file : files) {
                     delete(file.getPath(), pattern);
                 }
             }
@@ -179,7 +181,6 @@ public class IOUtils {
         String result = "";
         File f = new File(path);
         if (f.isFile() && f.canRead()) {
-            StringBuilder sb = new StringBuilder();
             FileInputStream fs = null;
             try {
                 fs = new FileInputStream(f);
@@ -195,7 +196,6 @@ public class IOUtils {
                     }
                 }
             }
-            result = sb.toString();
         }
         return result;
     }
@@ -238,13 +238,13 @@ public class IOUtils {
      */
     public static void writeFileAllText(String path, String text, boolean overwrite) {
         File file = new File(path);
-        if(file.exists()){
-            if(overwrite) {
+        if (file.exists()) {
+            if (!overwrite) {
                 return;
             }
-        }else {
+        } else {
             File parent = file.getParentFile();
-            if(!parent.exists()){
+            if (!parent.exists()) {
                 parent.mkdir();
             }
         }
@@ -278,13 +278,13 @@ public class IOUtils {
     public static void writeFileAllLine(String path, List<String> lines, boolean overwrite) {
         File file = new File(path);
         boolean exists = file.exists();
-        if(file.exists()){
-            if(overwrite) {
+        if (file.exists()) {
+            if (!overwrite) {
                 return;
             }
-        }else {
+        } else {
             File parent = file.getParentFile();
-            if(!parent.exists()){
+            if (!parent.exists()) {
                 parent.mkdir();
             }
         }
@@ -380,13 +380,13 @@ public class IOUtils {
      */
     public static void writeFile(String path, byte[] data, boolean overwrite) {
         File file = new File(path);
-        if(file.exists()){
-            if(overwrite) {
+        if (file.exists()) {
+            if (overwrite) {
                 return;
             }
-        }else {
+        } else {
             File parent = file.getParentFile();
-            if(!parent.exists()){
+            if (!parent.exists()) {
                 parent.mkdir();
             }
         }
@@ -409,5 +409,4 @@ public class IOUtils {
             }
         }
     }
-
 }

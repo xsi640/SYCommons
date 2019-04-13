@@ -1,4 +1,7 @@
-package com.suyang.common;
+package com.suyang.common.types;
+
+import com.suyang.common.types.DateUtils;
+import com.suyang.common.types.UUIDUtils;
 
 import java.util.Date;
 import java.util.UUID;

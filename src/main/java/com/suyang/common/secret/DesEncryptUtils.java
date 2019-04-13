@@ -1,4 +1,6 @@
-package com.suyang.common;
+package com.suyang.common.secret;
+
+import com.suyang.common.encode.EncodingUtils;
 
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
@@ -14,7 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-public class EncryptUtils {
+public class DesEncryptUtils {
 	private static String strKey = "c8cdf47595f94959850d49a703682e8f";	
 	private static Cipher ecipher;
 	private static Cipher dcipher;

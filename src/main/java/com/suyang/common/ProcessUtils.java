@@ -1,6 +1,6 @@
 package com.suyang.common;
 
-import org.apache.commons.lang3.StringUtils;
+import com.suyang.common.encode.EncodingUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 public class ProcessUtils {
-
-    private final static Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     /**
      * 开始一个进程
@@ -63,7 +61,7 @@ public class ProcessUtils {
             process = pb.start();
             process.waitFor();
             String line = null;
-            br = new BufferedReader(new InputStreamReader(process.getInputStream(), charset == null ? DEFAULT_CHARSET : charset));
+            br = new BufferedReader(new InputStreamReader(process.getInputStream(), charset == null ? EncodingUtils.DEFAULT_CHARSET : charset));
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }

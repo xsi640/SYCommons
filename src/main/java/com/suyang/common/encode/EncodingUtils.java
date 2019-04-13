@@ -1,4 +1,4 @@
-package com.suyang.common;
+package com.suyang.common.encode;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

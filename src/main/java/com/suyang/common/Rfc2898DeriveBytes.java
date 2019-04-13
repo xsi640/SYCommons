@@ -25,20 +25,6 @@ public class Rfc2898DeriveBytes {
 	private int endIndex = 0;
 	private int block = 1;
 
-	/**
-	 * Creates new instance.
-	 * 
-	 * @param password
-	 *            The password used to derive the key.
-	 * @param salt
-	 *            The key salt used to derive the key.
-	 * @param iterations
-	 *            The number of iterations for the operation.
-	 * @throws NoSuchAlgorithmException
-	 *             HmacSHA1 algorithm cannot be found.
-	 * @throws InvalidKeyException
-	 *             Salt must be 8 bytes or more. -or- Password cannot be null.
-	 */
 	public Rfc2898DeriveBytes(byte[] password, byte[] salt, int iterations) throws NoSuchAlgorithmException,
 			InvalidKeyException {
 		this.salt = salt;
@@ -49,11 +35,9 @@ public class Rfc2898DeriveBytes {
 
 	/**
 	 * Creates new instance.
-	 * 
+	 *
 	 * @param password
 	 *            The password used to derive the key.
-	 * @param salt
-	 *            The key salt used to derive the key.
 	 * @param iterations
 	 *            The number of iterations for the operation.
 	 * @throws NoSuchAlgorithmException
@@ -75,13 +59,9 @@ public class Rfc2898DeriveBytes {
 
 	/**
 	 * Creates new instance.
-	 * 
+	 *
 	 * @param password
 	 *            The password used to derive the key.
-	 * @param salt
-	 *            The key salt used to derive the key.
-	 * @param iterations
-	 *            The number of iterations for the operation.
 	 * @throws NoSuchAlgorithmException
 	 *             HmacSHA1 algorithm cannot be found.
 	 * @throws InvalidKeyException

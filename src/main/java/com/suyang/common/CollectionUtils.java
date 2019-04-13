@@ -1,14 +1,12 @@
 package com.suyang.common;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
+
 
 /**
  * 集合辅助工具类
@@ -52,53 +50,29 @@ public class CollectionUtils {
      * @param propValue 属性的值
      * @return 匹配的对象
      */
-    public static <T> T findOne(List<T> list, String propName, Object propValue) {
-        T result = null;
-        if (list != null && list.size() > 0) {
-            try {
-                Field field = list.get(0).getClass().getDeclaredField(propName);
+    public static <T> T findOne(Iterable<T> list, String propName, Object propValue) throws NoSuchFieldException, IllegalAccessException {
+        if (list == null)
+            return null;
+
+        Iterator<T> iterator = list.iterator();
+        Field field = null;
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (field == null) {
+                field = t.getClass().getDeclaredField(propName);
                 field.setAccessible(true);
-                for (T t : list) {
-                    Object value = field.get(t);
-                    if (value.equals(propValue)) {
-                        result = t;
-                        break;
-                    }
-                }
-            } catch (NoSuchFieldException e) {
-            } catch (SecurityException e) {
-            } catch (IllegalArgumentException e) {
-            } catch (IllegalAccessException e) {
+            }
+            Object value = field.get(t);
+            if (value == null && propValue == null) {
+                return t;
+            } else if (value != null && value.equals(propValue) ||
+                    propValue != null && propValue.equals(value)) {
+                return t;
             }
         }
-        return result;
+        return null;
     }
 
-    /**
-     * 查找集合中存在的项（返回所有匹配的项）
-     *
-     * @param list       检测的集合
-     * @param func       判断方法
-     * @param isDistinct 是否去除重复
-     * @return
-     */
-    public static <T> List<T> find(List<T> list, Predicate<T> func, boolean isDistinct) {
-        List<T> result = new ArrayList<>();
-        if (list == null || list.size() == 0 || func == null)
-            return result;
-
-        for (T t : list) {
-            if (func.test(t)) {
-                if (t == null)
-                    continue;
-                if (isDistinct && result.contains(t)) {
-                    continue;
-                }
-                result.add(t);
-            }
-        }
-        return result;
-    }
 
     /**
      * 查找集合中存在的一个项
@@ -107,15 +81,37 @@ public class CollectionUtils {
      * @param func 判断方法
      * @return
      */
-    public static <T> T findOne(List<T> list, Predicate<T> func) {
-        T result = null;
-        if (list == null || list.size() == 0 || func == null)
+    public static <T> T findOne(Iterable<T> list, Predicate<T> func) {
+        if (list == null)
+            return null;
+
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (func.test(t)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 查找集合中存在的项（返回所有匹配的项）
+     *
+     * @param list       检测的集合
+     * @param func       判断方法
+     * @return
+     */
+    public static <T> List<T> find(Iterable<T> list, Predicate<T> func) {
+        List<T> result = new ArrayList<>();
+        if (list == null || func == null)
             return result;
 
-        for (T t : list) {
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
             if (func.test(t)) {
-                result = t;
-                break;
+                result.add(t);
             }
         }
         return result;
@@ -128,29 +124,48 @@ public class CollectionUtils {
      * @return
      */
     public static <T> List<T> toList(T[] array) {
+        return Arrays.asList(array);
+    }
+
+    public static <T> List<T> toList(Iterable<T> list) {
+        if (list == null)
+            return null;
+        Iterator<T> iterator = list.iterator();
         List<T> result = new ArrayList<>();
-        if (array != null && array.length > 0) {
-            for (T t : array) {
-                result.add(t);
-            }
+        while (iterator.hasNext()) {
+            result.add(iterator.next());
         }
         return result;
     }
 
     /**
      * 集合转数组
+     *
      * @param list
      * @param <T>
      * @return
      */
-    public static <T> T[] toArray(List<T> list) {
+    public static <T> T[] toArray(Iterable<T> list, T[] array) {
         if (list == null)
             return null;
-        T[] result = (T[]) new Object[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
-        }
-        return result;
+
+        List<T> arrayList = toList(list);
+        return arrayList.toArray(array);
+    }
+
+
+    /**
+     * 集合转数组
+     *
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> T[] toArray(List<T> list, T[] array) {
+        if (list == null)
+            return null;
+
+        return list.toArray(array);
     }
 
     /**
@@ -159,27 +174,28 @@ public class CollectionUtils {
      * @param list
      * @return
      */
-    public static <T> List<T> distinct(List<T> list) {
-        List<T> result = new ArrayList<T>();
-        if (list != null && list.size() > 0) {
-            for (T t : list) {
-                if (!result.contains(t)) {
-                    result.add(t);
-                }
-            }
+    public static <T> List<T> distinct(Iterable<T> list) {
+        if (list == null)
+            return null;
+
+        Set<T> set = new HashSet<>();
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            set.add(iterator.next());
         }
+        List<T> result = new ArrayList<>(set.size());
+        result.addAll(set);
         return result;
     }
 
     /**
      * 根据字符串、分隔符、返回字符串集合
      *
-     * @param text 字符串
-     * @param strSplit 分隔符
-     * @param isDistinct 是否去掉重复
+     * @param text       字符串
+     * @param strSplit   分隔符
      * @return
      */
-    public static List<String> split(String text, String strSplit, boolean isDistinct) {
+    public static List<String> split(String text, String strSplit) {
         List<String> result = new ArrayList<>();
         if (StringUtils.isEmpty(text) || StringUtils.isEmpty(strSplit))
             return result;
@@ -187,13 +203,9 @@ public class CollectionUtils {
         String[] array = text.split(strSplit);
         if (array != null && array.length > 0) {
             for (String s : array) {
-                s = s.trim();
                 if (s == null)
                     continue;
-                if (isDistinct && result.contains(s)) {
-                    continue;
-                }
-                result.add(s);
+                result.add(s.trim());
             }
         }
         return result;
@@ -202,33 +214,26 @@ public class CollectionUtils {
     /**
      * 返回集合中，某个属性的集合
      *
-     * @param list 检测的集合
-     * @param propName 属性名称
-     * @param isDistinct 是否去除重复
+     * @param list       检测的集合
+     * @param propName   属性名称
      * @return
      */
-    public static <TProperty, TObject> List<TProperty> getPropertyList(List<TObject> list, String propName, boolean isDistinct) {
+    public static <TProperty, TObject> List<TProperty> getPropertyList(Iterable<TObject> list, String propName) throws NoSuchFieldException {
         List<TProperty> result = new ArrayList<TProperty>();
-        if (list == null || list.size() == 0 || StringUtils.isEmpty(propName))
+        if (list == null || StringUtils.isEmpty(propName))
             return result;
+
+        Iterator<TObject> iterator = list.iterator();
         Field field = null;
-        for (TObject t : list) {
+        while (iterator.hasNext()) {
+            TObject t = iterator.next();
             if (field == null) {
-                try {
-                    field = t.getClass().getDeclaredField(propName);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (SecurityException e) {
-                    e.printStackTrace();
-                }
+                field = t.getClass().getDeclaredField(propName);
             }
             field.setAccessible(true);
             try {
                 @SuppressWarnings("unchecked")
                 TProperty value = (TProperty) field.get(t);
-                if (isDistinct && result.contains(value)) {
-                    continue;
-                }
                 result.add(value);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
@@ -242,20 +247,19 @@ public class CollectionUtils {
     /**
      * 将指定的集合转换成另一个集合
      *
-     * @param list 检测的集合
-     * @param func 转换方法
-     * @param isDistinct 是否去除重复
+     * @param list       检测的集合
+     * @param converter  转换方法
      * @return
      */
-    public static <Tin, Tout> List<Tout> convertAll(List<Tin> list, Function<Tin, Tout> func, boolean isDistinct) {
+    public static <Tin, Tout> List<Tout> convertAll(Iterable<Tin> list, Function<Tin, Tout> converter) {
         List<Tout> result = new ArrayList<>();
-        if (list == null || list.size() == 0 || func == null)
+        if (list == null || converter == null)
             return result;
 
-        for (Tin t : list) {
-            Tout out = func.apply(t);
-            if (isDistinct && result.contains(out))
-                continue;
+        Iterator<Tin> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Tin t = iterator.next();
+            Tout out = converter.apply(t);
             result.add(out);
         }
         return result;
@@ -264,18 +268,36 @@ public class CollectionUtils {
     /**
      * 将集合转换成按指定字符串分割的字符串
      *
-     * @param list 集合
+     * @param list     集合
      * @param strSplit 分隔符
      * @return
      */
-    public static <T> String toString(List<T> list, String strSplit) {
-        if (list == null || list.size() == 0)
+    public static <T> String toString(Iterable<T> list, String strSplit) {
+        return toString(list, strSplit, null);
+    }
+
+
+    /**
+     * 将集合转换成按指定字符串分割的字符串
+     *
+     * @param list     集合
+     * @param strSplit 分隔符
+     * @return
+     */
+    public static <T> String toString(Iterable<T> list, String strSplit, Function<T, String> toStringFunc) {
+        if (list == null)
             return "";
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i).toString());
-            if (i != list.size() - 1) {
+        Iterator<T> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (toStringFunc != null) {
+                sb.append(toStringFunc.apply(t));
+            } else {
+                sb.append(t.toString());
+            }
+            if (iterator.hasNext()) {
                 sb.append(strSplit);
             }
         }

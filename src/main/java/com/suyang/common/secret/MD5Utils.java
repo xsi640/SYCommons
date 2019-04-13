@@ -1,4 +1,6 @@
-package com.suyang.common;
+package com.suyang.common.secret;
+
+import com.suyang.common.IOUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -20,6 +20,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
+import com.suyang.common.encode.EncodingUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class HttpUtils {

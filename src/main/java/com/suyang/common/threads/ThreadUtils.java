@@ -1,4 +1,6 @@
-package com.suyang.common;
+package com.suyang.common.threads;
+
+import com.suyang.common.Ref;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;

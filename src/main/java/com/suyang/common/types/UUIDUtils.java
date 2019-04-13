@@ -1,4 +1,4 @@
-package com.suyang.common;
+package com.suyang.common.types;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

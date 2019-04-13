@@ -1,4 +1,4 @@
-package com.suyang.common;
+package com.suyang.common.types;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

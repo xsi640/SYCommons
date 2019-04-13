@@ -1,6 +1,8 @@
 package com.suyang.common;
 
-@SuppressWarnings("ALL")
+/**
+ * 字节数组转数据类型时的兼容性转换
+ */
 public class CompatibleUtils {
 	/**
 	 * 将由c#语言的int转成的字节数组转换成int
