@@ -15,7 +15,7 @@ public class ZipUtils {
 	private static final int BUFFER_SIZE = 4096;
 	private static final int COMPRESS_LEVEL = 8;
 
-	public static void compress(String sourcePath, String zipPath) {
+	public static void compress(String sourcePath, String zipPath) throws IOException {
 		File file = new File(sourcePath);
 		if (!file.exists())
 			return;
@@ -57,9 +57,9 @@ public class ZipUtils {
 							zipStream.write(buffer, 0, len);
 						}
 					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+                        throw e;
 					} catch (IOException e) {
-						e.printStackTrace();
+                        throw e;
 					} finally {
 						if (in != null) {
 							try {
@@ -72,9 +72,9 @@ public class ZipUtils {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+            throw e;
 		} finally {
 			if (zipStream != null) {
 				try {
@@ -86,7 +86,7 @@ public class ZipUtils {
 		}
 	}
 
-	public static void decompress(String targetPath, String zipPath) {
+	public static void decompress(String targetPath, String zipPath) throws IOException {
 		if (!IOUtils.isFile(zipPath))
 			return;
 
@@ -116,9 +116,9 @@ public class ZipUtils {
 						}
 						fileStream.flush();
 					} catch (FileNotFoundException e) {
-						e.printStackTrace();
+                        throw e;
 					} catch (IOException e) {
-						e.printStackTrace();
+                        throw e;
 					} finally {
 						if (fileStream != null) {
 							fileStream.close();
@@ -127,9 +127,9 @@ public class ZipUtils {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+            throw e;
 		} catch (IOException e) {
-			e.printStackTrace();
+            throw e;
 		} finally {
 			if (zip != null) {
 				try {
