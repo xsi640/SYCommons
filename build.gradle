@@ -1,6 +1,4 @@
 plugins {
-    id "com.jfrog.bintray" version "1.7.3"
-    id "maven-publish"
     id 'java'
 }
 
@@ -32,5 +30,3 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
-
-apply from: rootProject.file("jcenter.gradle")
