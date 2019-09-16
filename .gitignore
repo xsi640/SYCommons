@@ -30,8 +30,12 @@ hs_err_pid*
 # idea files
 *.idea
 /target/
+/build/
 /.idea/
 *.iml
+
+# gralde
+/.gradle/
 
 # mac os
 .DS_Store

@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+    id "maven-publish"
+    id 'java'
+}
+
+group 'com.suyang'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+ext.vers = [
+        commons_io   : "2.6",
+        commons_codec: "1.12",
+        commons_lang : "3.8.1",
+        jackson      : "2.9.8",
+        cglib        : "3.2.12"
+]
+
+dependencies {
+    implementation "commons-io:commons-io:$vers.commons_io"
+    implementation "commons-codec:commons-codec:$vers.commons_codec"
+    implementation "org.apache.commons:commons-lang3:$vers.commons_lang"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$vers.jackson"
+    implementation "cglib:cglib:$vers.cglib"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+apply from: rootProject.file("jcenter.gradle")
