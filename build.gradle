@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'com.suyang'
+group 'com.github.suyang'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
