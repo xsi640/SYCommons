@@ -1,4 +1,4 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;

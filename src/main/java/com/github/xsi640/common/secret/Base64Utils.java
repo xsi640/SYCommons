@@ -1,8 +1,8 @@
-package com.github.suyang.common.secret;
+package com.github.xsi640.common.secret;
 
 import java.nio.charset.Charset;
 
-import com.github.suyang.common.encode.EncodingUtils;
+import com.github.xsi640.common.encode.EncodingUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 

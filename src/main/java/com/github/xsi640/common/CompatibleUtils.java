@@ -1,4 +1,4 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
 /**
  * 字节数组转数据类型时的兼容性转换

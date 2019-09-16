@@ -1,4 +1,4 @@
-package com.github.suyang.common.strings;
+package com.github.xsi640.common.strings;
 
 
 import java.util.regex.Matcher;

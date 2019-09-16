@@ -1,6 +1,6 @@
-package com.github.suyang.common.secret;
+package com.github.xsi640.common.secret;
 
-import com.github.suyang.common.encode.EncodingUtils;
+import com.github.xsi640.common.encode.EncodingUtils;
 
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;

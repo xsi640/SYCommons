@@ -1,4 +1,4 @@
-package com.github.suyang.common.streams;
+package com.github.xsi640.common.streams;
 
 import java.util.ArrayList;
 import java.util.Collections;

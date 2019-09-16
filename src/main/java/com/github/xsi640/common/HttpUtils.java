@@ -1,4 +1,4 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -20,7 +20,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
-import com.github.suyang.common.encode.EncodingUtils;
+import com.github.xsi640.common.encode.EncodingUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class HttpUtils {

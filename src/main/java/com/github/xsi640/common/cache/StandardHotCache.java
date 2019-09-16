@@ -1,9 +1,9 @@
-package com.github.suyang.common.cache;
+package com.github.xsi640.common.cache;
 
 import java.util.*;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import com.github.suyang.common.engines.StandardCircleEngine;
+import com.github.xsi640.common.engines.StandardCircleEngine;
 
 /**
  * 标准热缓存

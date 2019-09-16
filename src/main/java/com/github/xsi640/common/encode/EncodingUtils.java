@@ -1,4 +1,4 @@
-package com.github.suyang.common.encode;
+package com.github.xsi640.common.encode;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

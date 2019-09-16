@@ -1,6 +1,6 @@
-package com.github.suyang.common.threads;
+package com.github.xsi640.common.threads;
 
-import com.github.suyang.common.Ref;
+import com.github.xsi640.common.Ref;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;

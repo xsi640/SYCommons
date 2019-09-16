@@ -1,4 +1,4 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
 import java.lang.reflect.Field;
 import java.util.*;

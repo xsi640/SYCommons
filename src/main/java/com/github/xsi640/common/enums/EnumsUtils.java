@@ -1,4 +1,4 @@
-package com.github.suyang.common.enums;
+package com.github.xsi640.common.enums;
 
 import java.lang.annotation.Annotation;
 

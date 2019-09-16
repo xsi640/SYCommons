@@ -1,4 +1,4 @@
-package com.github.suyang.common.events;
+package com.github.xsi640.common.events;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;

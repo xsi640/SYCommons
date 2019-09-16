@@ -1,4 +1,4 @@
-package com.github.suyang.common.types;
+package com.github.xsi640.common.types;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

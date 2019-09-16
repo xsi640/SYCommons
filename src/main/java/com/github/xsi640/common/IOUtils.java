@@ -1,4 +1,4 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.github.suyang.common.encode.EncodingUtils;
+import com.github.xsi640.common.encode.EncodingUtils;
 import org.apache.commons.io.FilenameUtils;
 
 public class IOUtils {

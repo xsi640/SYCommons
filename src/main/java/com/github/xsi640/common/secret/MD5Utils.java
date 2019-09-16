@@ -1,6 +1,6 @@
-package com.github.suyang.common.secret;
+package com.github.xsi640.common.secret;
 
-import com.github.suyang.common.IOUtils;
+import com.github.xsi640.common.IOUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

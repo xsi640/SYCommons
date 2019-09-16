@@ -1,4 +1,4 @@
-package com.github.suyang.common.xml;
+package com.github.xsi640.common.xml;
 
 public class TextElement extends Element {
     private String content;

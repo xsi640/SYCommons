@@ -1,6 +1,6 @@
-package com.github.suyang.common.secret;
+package com.github.xsi640.common.secret;
 
-import com.github.suyang.common.Rfc2898DeriveBytes;
+import com.github.xsi640.common.Rfc2898DeriveBytes;
 import org.apache.commons.codec.binary.Base64;
 
 /**

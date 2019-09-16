@@ -1,6 +1,6 @@
-package com.github.suyang.common;
+package com.github.xsi640.common;
 
-import com.github.suyang.common.encode.EncodingUtils;
+import com.github.xsi640.common.encode.EncodingUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

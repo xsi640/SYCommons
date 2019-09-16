@@ -1,4 +1,4 @@
-package com.github.suyang.common.cache;
+package com.github.xsi640.common.cache;
 
 /**
  * 缓存封装包

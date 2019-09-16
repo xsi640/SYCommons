@@ -1,4 +1,4 @@
-package com.github.suyang.common.types;
+package com.github.xsi640.common.types;
 
 /**
  * 字节大小显示方式
