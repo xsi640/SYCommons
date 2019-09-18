@@ -21,3 +21,8 @@
 + 类型转换工具
 + Zip压缩、解压工具
 + UUID工具
+
+```
+./gradlew publishToMavenLocal
+./gradlew publish
+```

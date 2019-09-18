@@ -13,7 +13,7 @@ public class GZipUtils {
      *
      * @param data
      * @return
-     * @throws Exception
+     * @throws IOException
      */
     public static byte[] compress(byte[] data) throws IOException {
         if (data == null || data.length == 0)
@@ -36,7 +36,7 @@ public class GZipUtils {
      * 文件压缩
      *
      * @param file
-     * @throws Exception
+     * @throws IOException
      */
     public static void compress(File file) throws IOException {
         compress(file, true);
@@ -66,7 +66,7 @@ public class GZipUtils {
      *
      * @param is
      * @param os
-     * @throws Exception
+     * @throws IOException
      */
     public static void compress(InputStream is, OutputStream os) throws IOException {
         try (GZIPOutputStream gos = new GZIPOutputStream(os)) {
@@ -86,7 +86,7 @@ public class GZipUtils {
      * 文件压缩
      *
      * @param path
-     * @throws Exception
+     * @throws IOException
      */
     public static void compress(String path) throws IOException {
         compress(path, false);
@@ -97,7 +97,7 @@ public class GZipUtils {
      *
      * @param path
      * @param delete 是否删除原始文件
-     * @throws Exception
+     * @throws IOException
      */
     public static void compress(String path, boolean delete) throws IOException {
         File file = new File(path);
@@ -109,7 +109,7 @@ public class GZipUtils {
      *
      * @param data
      * @return
-     * @throws Exception
+     * @throws IOException
      */
     public static byte[] decompress(byte[] data) throws IOException {
         if (data == null || data.length == 0)
@@ -131,7 +131,7 @@ public class GZipUtils {
      * 文件解压缩
      *
      * @param file
-     * @throws Exception
+     * @throws IOException
      */
     public static void decompress(File file) throws IOException {
         decompress(file, true);
@@ -142,7 +142,7 @@ public class GZipUtils {
      *
      * @param file
      * @param delete 是否删除原始文件
-     * @throws Exception
+     * @throws IOException
      */
     public static void decompress(File file, boolean delete) throws IOException {
         try (FileInputStream fis = new FileInputStream(file)) {
@@ -166,7 +166,7 @@ public class GZipUtils {
      *
      * @param is
      * @param os
-     * @throws Exception
+     * @throws IOException
      */
     public static void decompress(InputStream is, OutputStream os) throws IOException {
         try (GZIPInputStream gis = new GZIPInputStream(is)) {
@@ -184,7 +184,7 @@ public class GZipUtils {
      * 文件解压缩
      *
      * @param path
-     * @throws Exception
+     * @throws IOException
      */
     public static void decompress(String path) throws IOException {
         decompress(path, true);
@@ -195,7 +195,7 @@ public class GZipUtils {
      *
      * @param path
      * @param delete 是否删除原始文件
-     * @throws Exception
+     * @throws IOException
      */
     public static void decompress(String path, boolean delete) throws IOException {
         File file = new File(path);

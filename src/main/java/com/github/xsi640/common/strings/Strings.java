@@ -8,15 +8,12 @@ import static java.util.regex.Pattern.quote;
 
 /**
  * Usage:
- * <p/>
  * <pre>
  *     Strings.format("Hello {firstname} {lastname}!")
  *         .with("firstname", "John")
  *         .with("lastname", "Doe")
  *         .build();
  * </pre>
- *
- * @return The formatted string.
  */
 public final class Strings {
 
@@ -26,7 +23,6 @@ public final class Strings {
 
     /**
      * Usage:
-     * <p/>
      * <pre>
      *     Strings.format("Hello {firstname} {lastname}!")
      *         .with("firstname", "John")
@@ -46,7 +42,6 @@ public final class Strings {
 
     /**
      * Usage:
-     * <p/>
      * <pre>
      *     Strings.format("Hello [firstname] [lastname]!", "[", "]")
      *         .with("firstname", "John")

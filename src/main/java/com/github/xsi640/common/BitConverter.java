@@ -14,7 +14,7 @@ public class BitConverter {
 	
 	/**
 	 * boolean 转换成 byte
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte getBytes(boolean value) {
@@ -23,7 +23,7 @@ public class BitConverter {
 	
 	/**
 	 * byte 转换成 boolean
-	 * @param b
+	 * @param b 要转换的值
 	 * @return
 	 */
 	public static boolean toBoolean(byte b) {
@@ -36,7 +36,7 @@ public class BitConverter {
 
 	/**
 	 * short 转换成 byte[]
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(short value) {
@@ -48,7 +48,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 short
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static short toShort(byte[] bytes) {
@@ -57,7 +57,7 @@ public class BitConverter {
 	
 	/**
 	 * int 转换成 byte[]
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(int value) {
@@ -71,7 +71,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 int
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static int toInt(byte[] bytes) {
@@ -80,7 +80,7 @@ public class BitConverter {
 	
 	/**
 	 * long 转换成 byte[]
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(long value) {
@@ -98,7 +98,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 long
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static long toLong(byte[] bytes) {
@@ -114,7 +114,7 @@ public class BitConverter {
 
 	/**
 	 * float 转换成 byte[]
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(float value) {
@@ -129,7 +129,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 float
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static float toFloat(byte[] bytes) {
@@ -138,7 +138,7 @@ public class BitConverter {
 
 	/**
 	 * double 转换成 byte[]
-	 * @param value
+	 * @param value 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(double value) {
@@ -157,7 +157,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 double
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static double toDouble(byte[] bytes) {
@@ -166,7 +166,7 @@ public class BitConverter {
 	
 	/**
 	 * char 转成 byte[]
-	 * @param c
+	 * @param c 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(char c) {
@@ -178,7 +178,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 char
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static char toChar(byte[] bytes) {
@@ -187,7 +187,7 @@ public class BitConverter {
 	
 	/**
 	 * char[] 转换成 byte[]
-	 * @param cArray
+	 * @param cArray 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(char[] cArray) {
@@ -196,8 +196,8 @@ public class BitConverter {
 	
 	/**
 	 * char[] 转换成 byte[]
-	 * @param cArray
-	 * @param charset
+	 * @param cArray 要转换的值
+	 * @param charset 字符集
 	 * @return
 	 */
 	public static byte[] getBytes(char[] cArray, Charset charset) {
@@ -206,7 +206,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 char[]
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static char[] toCharArray(byte[] bytes) {
@@ -215,8 +215,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 char[]
-	 * @param bytes
-	 * @param charset
+	 * @param bytes 要转换的值
+	 * @param charset 字符集
 	 * @return
 	 */
 	public static char[] toCharArray(byte[] bytes, Charset charset) {
@@ -225,7 +225,7 @@ public class BitConverter {
 	
 	/**
 	 * string 转换成 char[]
-	 * @param s
+	 * @param s 要转换的值
 	 * @return
 	 */
 	public static byte[] getBytes(String s) {
@@ -234,8 +234,8 @@ public class BitConverter {
 	
 	/**
 	 * string 转换成 byte[]
-	 * @param s
-	 * @param charset
+	 * @param s 要转换的值
+	 * @param charset 字符集
 	 * @return
 	 */
 	public static byte[] getBytes(String s, Charset charset) {
@@ -244,7 +244,7 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 string
-	 * @param bytes
+	 * @param bytes 要转换的值
 	 * @return
 	 */
 	public static String toString(byte[] bytes) {
@@ -253,8 +253,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 string
-	 * @param bytes
-	 * @param charset
+	 * @param bytes 要转换的值
+	 * @param charset 字符集
 	 * @return
 	 */
 	public static String toString(byte[] bytes, Charset charset) {
