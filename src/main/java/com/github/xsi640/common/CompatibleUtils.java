@@ -6,8 +6,8 @@ package com.github.xsi640.common;
 public class CompatibleUtils {
 	/**
 	 * 将由c#语言的int转成的字节数组转换成int
-	 * @param intBytes
-	 * @return
+	 * @param intBytes 要转换的byte[]
+	 * @return 转换完成的int
 	 */
 	public static int csharpIntByteToInt(byte[] intBytes) {
 		return (((intBytes[3] & 0xff) << 24) | 
@@ -18,8 +18,8 @@ public class CompatibleUtils {
 
 	/**
 	 * 将int转换成c#语言可以识别的字节数组
-	 * @param number
-	 * @return
+	 * @param number 要转换的int
+	 * @return 转换完成后的byte[]
 	 */
 	public static byte[] csharpIntToBytes(int number) {
 		byte[] toSendLenBytes = new byte[4];
@@ -32,8 +32,8 @@ public class CompatibleUtils {
 
 	/**
 	 * 将c#语言的long转换成的自己数组转换成long
-	 * @param longBytes
-	 * @return
+	 * @param longBytes 要转换的byte[]
+	 * @return 转换完成后的long
 	 */
 	public static long csharpLongByteToLong(byte[] longBytes) {
 		return (((longBytes[7] & 0xff) << 64) |
@@ -48,8 +48,8 @@ public class CompatibleUtils {
 
 	/**
 	 * 将long转换成c#语言可以识别的字节数组
-	 * @param number
-	 * @return
+	 * @param number 要转换的long
+	 * @return 转换完成后的byte[]
 	 */
 	public static byte[] csharpLongToBytes(long number){
 		byte[] toSendLenBytes = new byte[8];

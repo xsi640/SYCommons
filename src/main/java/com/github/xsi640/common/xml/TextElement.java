@@ -1,5 +1,8 @@
 package com.github.xsi640.common.xml;
 
+/**
+ * TextElement，内容为字符串
+ */
 public class TextElement extends Element {
     private String content;
 

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import static java.util.regex.Pattern.quote;
 
 /**
+ * String格式化类
  * Usage:
  * <pre>
  *     Strings.format("Hello {firstname} {lastname}!")
@@ -18,7 +19,6 @@ import static java.util.regex.Pattern.quote;
 public final class Strings {
 
     private Strings() {
-        // Prevents instantiation
     }
 
     /**

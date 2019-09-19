@@ -1,6 +1,8 @@
 package com.github.xsi640.common.xml;
 
-
+/**
+ * XML转字符串时使用的工具类，提供换行和缩进的辅助操作
+ */
 public class OutputUtilities {
     private static final String lineSeparator;
 

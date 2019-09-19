@@ -3,6 +3,9 @@ package com.github.xsi640.common.xml;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * XmlElement，内容为attributes或子element
+ */
 public class XmlElement extends Element {
     private List<NameValue<String>> attributes;
 

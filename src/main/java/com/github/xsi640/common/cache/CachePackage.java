@@ -1,7 +1,8 @@
 package com.github.xsi640.common.cache;
 
 /**
- * 缓存封装包
+ * 缓存封装包，提供Key，Value，LastAccessTime的包装类
+ * @author suyang
  * @param <TKey> 缓存Key
  * @param <TValue> 缓存Value
  */

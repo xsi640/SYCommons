@@ -1,5 +1,8 @@
 package com.github.xsi640.common.xml;
 
+/**
+ * XmlDocument类
+ */
 public class Document {
     private String publicId;
 
@@ -33,6 +36,10 @@ public class Document {
         return systemId;
     }
 
+    /**
+     * 输出XML文档字符串
+     * @return
+     */
     public String getFormattedContent() {
         StringBuilder sb = new StringBuilder();
 

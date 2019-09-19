@@ -2,6 +2,10 @@ package com.github.xsi640.common.xml;
 
 import java.util.Objects;
 
+/**
+ * Name，Value封装
+ * @param <T>
+ */
 public class NameValue<T> {
     private String name;
     private T value;

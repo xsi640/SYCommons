@@ -11,11 +11,11 @@ import java.nio.charset.Charset;
  *
  */
 public class BitConverter {
-	
+
 	/**
 	 * boolean 转换成 byte
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的boolean
+	 * @return 转换完成的byte[]
 	 */
 	public static byte getBytes(boolean value) {
 		return (byte) (value ? 1 : 0);
@@ -23,8 +23,8 @@ public class BitConverter {
 	
 	/**
 	 * byte 转换成 boolean
-	 * @param b 要转换的值
-	 * @return
+	 * @param b 要转换的byte
+	 * @return 转换完成的boolean
 	 */
 	public static boolean toBoolean(byte b) {
 		if(b == 1) {
@@ -36,8 +36,8 @@ public class BitConverter {
 
 	/**
 	 * short 转换成 byte[]
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的short
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(short value) {
 		byte[] result = new byte[2];
@@ -48,8 +48,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 short
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的short
 	 */
 	public static short toShort(byte[] bytes) {
 		return (short) (bytes[0] << 8 | (bytes[1] & 0xFF));
@@ -57,8 +57,8 @@ public class BitConverter {
 	
 	/**
 	 * int 转换成 byte[]
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的int
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(int value) {
 		byte[] result = new byte[4];
@@ -71,8 +71,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 int
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的int
 	 */
 	public static int toInt(byte[] bytes) {
 		return bytes[0] << 24 | (bytes[1] & 0xFF) << 16 | (bytes[2] & 0xFF) << 8 | (bytes[3] & 0xFF);
@@ -80,8 +80,8 @@ public class BitConverter {
 	
 	/**
 	 * long 转换成 byte[]
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的long
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(long value) {
 		byte[] result = new byte[8];
@@ -98,8 +98,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 long
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的long
 	 */
 	public static long toLong(byte[] bytes) {
 		return bytes[0] << 56 | 
@@ -114,8 +114,8 @@ public class BitConverter {
 
 	/**
 	 * float 转换成 byte[]
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的float
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(float value) {
 		int bits = Float.floatToIntBits(value);
@@ -129,8 +129,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 float
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的float
 	 */
 	public static float toFloat(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).getFloat();
@@ -138,8 +138,8 @@ public class BitConverter {
 
 	/**
 	 * double 转换成 byte[]
-	 * @param value 要转换的值
-	 * @return
+	 * @param value 要转换的double
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(double value) {
 		long l = Double.doubleToRawLongBits(value);
@@ -157,8 +157,8 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 double
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的double
 	 */
 	public static double toDouble(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).getDouble();
@@ -166,8 +166,8 @@ public class BitConverter {
 	
 	/**
 	 * char 转成 byte[]
-	 * @param c 要转换的值
-	 * @return
+	 * @param c 要转换的char
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(char c) {
 		byte[] b = new byte[2];
@@ -178,84 +178,84 @@ public class BitConverter {
 	
 	/**
 	 * byte[] 转换成 char
-	 * @param bytes 要转换的值
-	 * @return
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的char
 	 */
 	public static char toChar(byte[] bytes) {
 		return (char) (((bytes[0] & 0xFF) << 8) | (bytes[1] & 0xFF));
 	}
 	
 	/**
-	 * char[] 转换成 byte[]
-	 * @param cArray 要转换的值
-	 * @return
+	 * char[] 转换成 byte[]，UTF-8编码
+	 * @param cArray 要转换的char[]
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(char[] cArray) {
 		return getBytes(new String(cArray), EncodingUtils.DEFAULT_CHARSET);
 	}
 	
 	/**
-	 * char[] 转换成 byte[]
-	 * @param cArray 要转换的值
+	 * char[] 转换成 byte[]，指定编码方式
+	 * @param cArray 要转换的char[]
 	 * @param charset 字符集
-	 * @return
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(char[] cArray, Charset charset) {
 		return getBytes(new String(cArray), charset);
 	}
 	
 	/**
-	 * byte[] 转换成 char[]
-	 * @param bytes 要转换的值
-	 * @return
+	 * byte[] 转换成 char[]，UTF-8编码
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的char[]
 	 */
 	public static char[] toCharArray(byte[] bytes) {
 		return toString(bytes, EncodingUtils.DEFAULT_CHARSET).toCharArray();
 	}
 	
 	/**
-	 * byte[] 转换成 char[]
-	 * @param bytes 要转换的值
+	 * byte[] 转换成 char[]，指定编码方式
+	 * @param bytes 要转换的byte[]
 	 * @param charset 字符集
-	 * @return
+	 * @return 转换完成的char[]
 	 */
 	public static char[] toCharArray(byte[] bytes, Charset charset) {
 		return toString(bytes, charset).toCharArray();
 	}
 	
 	/**
-	 * string 转换成 char[]
-	 * @param s 要转换的值
-	 * @return
+	 * string 转换成 char[]，UTF-8编码
+	 * @param s 要转换的string
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(String s) {
 		return getBytes(s, EncodingUtils.DEFAULT_CHARSET);
 	}
 	
 	/**
-	 * string 转换成 byte[]
-	 * @param s 要转换的值
+	 * string 转换成 byte[]，指定编码方式
+	 * @param s 要转换的string
 	 * @param charset 字符集
-	 * @return
+	 * @return 转换完成的byte[]
 	 */
 	public static byte[] getBytes(String s, Charset charset) {
 		return s.getBytes(charset);
 	}
 	
 	/**
-	 * byte[] 转换成 string
-	 * @param bytes 要转换的值
-	 * @return
+	 * byte[] 转换成 string，UTF-8编码
+	 * @param bytes 要转换的byte[]
+	 * @return 转换完成的string
 	 */
 	public static String toString(byte[] bytes) {
 		return toString(bytes, EncodingUtils.DEFAULT_CHARSET);
 	}
 	
 	/**
-	 * byte[] 转换成 string
-	 * @param bytes 要转换的值
+	 * byte[] 转换成 string，指定编码方式
+	 * @param bytes 要转换的byte[]
 	 * @param charset 字符集
-	 * @return
+	 * @return 转换完成的string
 	 */
 	public static String toString(byte[] bytes, Charset charset) {
 		return new String(bytes, charset);
