@@ -11,7 +11,7 @@ public class NameValueCollection {
 
 	/**
 	 * 获得集合大小
-	 * @return
+	 * @return 集合大小
 	 */
 	public int size() {
 		return map.size();
@@ -19,7 +19,7 @@ public class NameValueCollection {
 
 	/**
 	 * 集合是否为空
-	 * @return
+	 * @return true-集合为空，false-集合不为空
 	 */
 	public boolean isEmpty() {
 		return map.isEmpty();
@@ -27,8 +27,8 @@ public class NameValueCollection {
 
 	/**
 	 * 集合是否存在某个Key
-	 * @param key
-	 * @return
+	 * @param key 集合Key
+	 * @return true-存在，false-不存在
 	 */
 	public boolean containsKey(Object key) {
 		return map.containsKey(key);
@@ -36,8 +36,8 @@ public class NameValueCollection {
 
 	/**
 	 * 集合是否存在某个值
-	 * @param value
-	 * @return
+	 * @param value 集合中的值
+	 * @return true-存在，false-不存在
 	 */
 	public boolean containsValue(Object value) {
 		return map.containsValue(value);
@@ -45,8 +45,8 @@ public class NameValueCollection {
 
 	/**
 	 * 获取某个key的值
-	 * @param key
-	 * @return
+	 * @param key 集合Key
+	 * @return 获取集合中的值
 	 */
 	public String get(Object key) {
 		List<String> lists = map.get(key);
@@ -57,8 +57,8 @@ public class NameValueCollection {
 
 	/**
 	 * 设置key-value
-	 * @param key
-	 * @param value
+	 * @param key 集合Key
+	 * @param value 集合中的值
 	 */
 	public void put(String key, String value) {
 		List<String> lists = map.get(key);
@@ -73,14 +73,14 @@ public class NameValueCollection {
 
 	/**
 	 * 移除
-	 * @param key
+	 * @param key 集合Key
 	 */
 	public void remove(Object key) {
 		map.remove(key);
 	}
 
 	/**
-	 * 清空
+	 * 清空集合
 	 */
 	public void clear() {
 		map.clear();
@@ -88,7 +88,7 @@ public class NameValueCollection {
 
 	/**
 	 * 获取所有Key
-	 * @return
+	 * @return 所以的Key集合
 	 */
 	public Set<String> keySet() {
 		return map.keySet();
@@ -96,7 +96,7 @@ public class NameValueCollection {
 
 	/**
 	 * 获取所有值
-	 * @return
+	 * @return 所有值的集合
 	 */
 	public Collection<List<String>> values(){
 		return map.values();
@@ -104,7 +104,7 @@ public class NameValueCollection {
 
 	/**
 	 * 获取所有值（字符串形式）
-	 * @return
+	 * @return 所有值的集合（字符串）
 	 */
 	public Collection<String> valuesAsString() {
 		Collection<List<String>> collection = map.values();

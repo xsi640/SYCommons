@@ -4,16 +4,21 @@ import java.io.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+/**
+ * GZip压缩工具类（仅支持单文件，或者数据、流的压缩和解压缩）
+ *
+ * @author suyang
+ */
 public class GZipUtils {
-    public static final int BUFFER = 4096;
-    public static final String EXT = ".gz";
+    public static final int BUFFER_SIZE = 4096;
+    public static final String EXT_NAME = ".gz";
 
     /**
-     * 数据压缩
+     * byte[]压缩
      *
-     * @param data
-     * @return
-     * @throws IOException
+     * @param data 压缩的byte[]
+     * @return 压缩后的byte[]
+     * @throws IOException 如果发生IO错误
      */
     public static byte[] compress(byte[] data) throws IOException {
         if (data == null || data.length == 0)
@@ -33,25 +38,25 @@ public class GZipUtils {
     }
 
     /**
-     * 文件压缩
+     * 文件压缩，默认生成新文件，[原文件名].gz
      *
-     * @param file
-     * @throws IOException
+     * @param file 要压缩的文件
+     * @throws IOException 如果发生IO错误
      */
     public static void compress(File file) throws IOException {
         compress(file, true);
     }
 
     /**
-     * 文件压缩
+     * 文件压缩，默认生成新文件，[原文件名].gz
      *
-     * @param file
-     * @param delete 是否删除原始文件
-     * @throws IOException
+     * @param file   要压缩的文件
+     * @param delete 是否删除源文件
+     * @throws IOException 如果发生IO错误
      */
     public static void compress(File file, boolean delete) throws IOException {
         try (FileInputStream fis = new FileInputStream(file)) {
-            try (FileOutputStream fos = new FileOutputStream(file.getPath() + EXT)) {
+            try (FileOutputStream fos = new FileOutputStream(file.getPath() + EXT_NAME)) {
                 compress(fis, fos);
                 fos.flush();
             }
@@ -64,15 +69,15 @@ public class GZipUtils {
     /**
      * 数据压缩
      *
-     * @param is
-     * @param os
-     * @throws IOException
+     * @param is 输入的数据流（压缩前）
+     * @param os 输出的数据流（压缩后）
+     * @throws IOException 如果发送IO错误
      */
     public static void compress(InputStream is, OutputStream os) throws IOException {
         try (GZIPOutputStream gos = new GZIPOutputStream(os)) {
             int count;
-            byte data[] = new byte[BUFFER];
-            while ((count = is.read(data, 0, BUFFER)) != -1) {
+            byte data[] = new byte[BUFFER_SIZE];
+            while ((count = is.read(data, 0, BUFFER_SIZE)) != -1) {
                 gos.write(data, 0, count);
             }
             gos.finish();
@@ -85,8 +90,8 @@ public class GZipUtils {
     /**
      * 文件压缩
      *
-     * @param path
-     * @throws IOException
+     * @param path 要压缩的文件路径，默认生成新文件名[原文件名].gz
+     * @throws IOException 如果发生IO错误
      */
     public static void compress(String path) throws IOException {
         compress(path, false);
@@ -95,9 +100,9 @@ public class GZipUtils {
     /**
      * 文件压缩
      *
-     * @param path
+     * @param path   要压缩的文件路径，默认生成新文件名[原文件名].gz
      * @param delete 是否删除原始文件
-     * @throws IOException
+     * @throws IOException 如果发生IO错误
      */
     public static void compress(String path, boolean delete) throws IOException {
         File file = new File(path);
@@ -107,9 +112,9 @@ public class GZipUtils {
     /**
      * 数据解压缩
      *
-     * @param data
-     * @return
-     * @throws IOException
+     * @param data 要解压缩的byte[]
+     * @return 解压缩后的byte[]
+     * @throws IOException 如果发生IO错误
      */
     public static byte[] decompress(byte[] data) throws IOException {
         if (data == null || data.length == 0)
@@ -130,23 +135,23 @@ public class GZipUtils {
     /**
      * 文件解压缩
      *
-     * @param file
-     * @throws IOException
+     * @param file 要解压缩的文件，解压缩的文件默认去除.gz扩展名
+     * @throws IOException 如果发生IO错误
      */
     public static void decompress(File file) throws IOException {
         decompress(file, true);
     }
 
     /**
-     * 文件解压缩
+     * 文件解压缩文件
      *
-     * @param file
+     * @param file   要解压缩的文件，解压缩的文件默认去除.gz扩展名
      * @param delete 是否删除原始文件
-     * @throws IOException
+     * @throws IOException 如果发生IO错误
      */
     public static void decompress(File file, boolean delete) throws IOException {
         try (FileInputStream fis = new FileInputStream(file)) {
-            try (FileOutputStream fos = new FileOutputStream(file.getPath().replace(EXT, ""))) {
+            try (FileOutputStream fos = new FileOutputStream(file.getPath().replace(EXT_NAME, ""))) {
                 decompress(fis, fos);
                 fos.flush();
             } catch (IOException e) {
@@ -164,15 +169,15 @@ public class GZipUtils {
     /**
      * 数据解压缩
      *
-     * @param is
-     * @param os
-     * @throws IOException
+     * @param is 要解压缩的数据流
+     * @param os 解压缩后的数据流
+     * @throws IOException 如果发生IO错误
      */
     public static void decompress(InputStream is, OutputStream os) throws IOException {
         try (GZIPInputStream gis = new GZIPInputStream(is)) {
             int count;
-            byte data[] = new byte[BUFFER];
-            while ((count = gis.read(data, 0, BUFFER)) != -1) {
+            byte data[] = new byte[BUFFER_SIZE];
+            while ((count = gis.read(data, 0, BUFFER_SIZE)) != -1) {
                 os.write(data, 0, count);
             }
         } catch (IOException e) {
@@ -183,8 +188,8 @@ public class GZipUtils {
     /**
      * 文件解压缩
      *
-     * @param path
-     * @throws IOException
+     * @param path 要解压缩的文件，解压缩的文件默认去除.gz扩展名
+     * @throws IOException 如果发生IO错误
      */
     public static void decompress(String path) throws IOException {
         decompress(path, true);
@@ -193,9 +198,9 @@ public class GZipUtils {
     /**
      * 文件解压缩
      *
-     * @param path
+     * @param path   要解压缩的文件，解压缩的文件默认去除.gz扩展名
      * @param delete 是否删除原始文件
-     * @throws IOException
+     * @throws IOException 如果发生IO错误
      */
     public static void decompress(String path, boolean delete) throws IOException {
         File file = new File(path);

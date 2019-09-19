@@ -5,20 +5,26 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import com.github.xsi640.common.encode.EncodingUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
+/**
+ * IO相关工具类
+ */
 public class IOUtils {
+
     /**
      * 判断文件或文件夹是否存在
      *
-     * @param path 路径
-     * @return
+     * @param path 文件或文件夹路径
+     * @return true-已存在，false-不存在
      */
     public static boolean exists(String path) {
         File f = new File(path);
@@ -29,7 +35,7 @@ public class IOUtils {
      * 判断是否是文件
      *
      * @param path 文件路径
-     * @return
+     * @return true-是文件，false-不是文件
      */
     public static boolean isFile(String path) {
         File f = new File(path);
@@ -40,7 +46,7 @@ public class IOUtils {
      * 判断是否是文件目录
      *
      * @param path 文件目录路径
-     * @return
+     * @return true-是文件夹，false-不是文件夹
      */
     public static boolean isDirectory(String path) {
         File f = new File(path);
@@ -51,22 +57,24 @@ public class IOUtils {
      * 获取文件大小
      *
      * @param path 文件路径
-     * @return
+     * @return 如果是文件返回文件大小，否则，返回目录大小
      */
     public static long getFileSize(String path) {
         long result = 0;
         File f = new File(path);
         if (f.isFile()) {
             result = f.length();
+        } else {
+            result = FileUtils.sizeOfDirectory(f);
         }
         return result;
     }
 
     /**
-     * 链接路径
+     * 连接路径
      *
-     * @param paths
-     * @return
+     * @param paths 路径名称
+     * @return 完整路径
      */
     public static String combine(String... paths) {
         String result = "";
@@ -77,10 +85,10 @@ public class IOUtils {
     }
 
     /**
-     * 获取文件目录
+     * 获取文件所在的目录，如果是文件夹，返回父文件夹
      *
-     * @param path
-     * @return
+     * @param path 文件路径
+     * @return 所在目录，如果是文件夹，返回父文件夹
      */
     public static String getDirectory(String path) {
         File file = new File(path);
@@ -112,7 +120,7 @@ public class IOUtils {
     /**
      * 删除文件或目录
      *
-     * @param path
+     * @param path 文件或文件夹路径
      */
     public static void delete(String path) {
         File f = new File(path);
@@ -121,9 +129,13 @@ public class IOUtils {
                 f.delete();
             } else {
                 try {
-                    org.apache.commons.io.FileUtils.deleteDirectory(f);
+                    FileUtils.deleteDirectory(f);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        FileUtils.forceDelete(f);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         }
@@ -132,17 +144,17 @@ public class IOUtils {
     /**
      * 获取文件的扩展名，不带"."
      *
-     * @param path
-     * @return
+     * @param path 获取文件名的路径
+     * @return 文件的扩展名，不带"."
      */
     public static String getExtension(String path) {
         return FilenameUtils.getExtension(path);
     }
 
     /**
-     * 创建路径
+     * 根据路径创建文件夹，如果文件夹已存在，不处理
      *
-     * @param path
+     * @param path 文件路径
      */
     public static void createDirectory(String path) {
         File f = new File(path);
@@ -150,93 +162,101 @@ public class IOUtils {
             f.mkdirs();
     }
 
+    /**
+     * 获取所有文件，包括子文件
+     *
+     * @param path 文件夹路径
+     * @return 所有文件的集合
+     */
     public static List<File> getAllFiles(String path) {
         List<File> result = new ArrayList<File>();
         File file = new File(path);
         if (file.isFile()) {
             result.add(file);
         } else if (file.isDirectory()) {
-            getAllFiles(file, result);
+            fillAllFiles(file, result);
         }
         return result;
     }
 
-    private static void getAllFiles(File file, List<File> fileLists) {
+    private static void fillAllFiles(File file, List<File> fileLists) {
         File[] files = file.listFiles();
         for (File f : files) {
             fileLists.add(f);
             if (f.isDirectory()) {
-                getAllFiles(f, fileLists);
+                fillAllFiles(f, fileLists);
             }
         }
     }
 
     /**
-     * 读取文件所有文本内容
+     * 读取文件所有文本内容，默认UTF-8
      *
-     * @param path
-     * @return
+     * @param path 文件路径
+     * @return 文件内容
+     * @throws IOException 文件不存在或不能读取
      */
-    public static String readFileAllText(String path) {
-        String result = "";
-        File f = new File(path);
-        if (f.isFile() && f.canRead()) {
-            FileInputStream fs = null;
-            try {
-                fs = new FileInputStream(f);
-                result = org.apache.commons.io.IOUtils.toString(fs, EncodingUtils.DEFAULT_CHARSET);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fs != null) {
-                    try {
-                        fs.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return result;
+    public static String readFileAllText(String path) throws IOException {
+        return FileUtils.readFileToString(new File(path), EncodingUtils.DEFAULT_CHARSET);
     }
 
     /**
-     * 读取文件所有行
+     * 读取文件所有文本内容，默认UTF-8
      *
-     * @param path
-     * @return
+     * @param path    文件路径
+     * @param charset 文件编码方式
+     * @return 文件内容
+     * @throws IOException 文件不存在或不能读取
      */
-    public static List<String> readFileAllLine(String path) {
-        List<String> result = null;
-        File f = new File(path);
-        if (f.isFile() && f.canRead()) {
-            FileInputStream fs = null;
-            try {
-                fs = new FileInputStream(f);
-                result = org.apache.commons.io.IOUtils.readLines(fs, EncodingUtils.DEFAULT_CHARSET);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fs != null) {
-                    try {
-                        fs.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return result;
+    public static String readFileAllText(String path, Charset charset) throws IOException {
+        return FileUtils.readFileToString(new File(path), charset);
+    }
+
+    /**
+     * 读取文件所有行内容，默认UTF-8编码
+     *
+     * @param path 文件路径
+     * @return 文件所有的lines
+     * @throws IOException 文件不存在或不能读取
+     */
+    public static List<String> readFileAllLine(String path) throws IOException {
+        return FileUtils.readLines(new File(path), EncodingUtils.DEFAULT_CHARSET);
+    }
+
+    /**
+     * 读取文件所有行内容
+     *
+     * @param path    文件路径
+     * @param charset 编码方式
+     * @return 文件所有的lines
+     * @throws IOException 文件不存在或不能读取
+     */
+    public static List<String> readFileAllLine(String path, Charset charset) throws IOException {
+        return FileUtils.readLines(new File(path), charset);
     }
 
     /**
      * 将制定内容写入一个文件，默认UTF-8编码
      *
-     * @param path
-     * @param text
-     * @param overwrite
+     * @param path      文件路径
+     * @param text      文件内容
+     * @param overwrite 是否覆盖
+     * @throws IOException 文件不能写入
      */
-    public static void writeFileAllText(String path, String text, boolean overwrite) {
+    public static void writeFileAllText(String path, String text, boolean overwrite) throws IOException {
+        writeFileAllText(path, text, EncodingUtils.DEFAULT_CHARSET, overwrite);
+    }
+
+    /**
+     * 将制定内容写入一个文件，默认UTF-8编码
+     *
+     * @param path      文件路径
+     * @param text      文件内容
+     * @param charset   编码方式
+     * @param overwrite 是否覆盖
+     * @throws IOException 文件不能写入
+     */
+    public static void writeFileAllText(String path, String text, Charset charset, boolean overwrite) throws IOException {
         File file = new File(path);
         if (file.exists()) {
             if (!overwrite) {
@@ -249,35 +269,33 @@ public class IOUtils {
             }
         }
 
-        FileOutputStream fs = null;
-        try {
-            fs = new FileOutputStream(file);
-            org.apache.commons.io.IOUtils.write(text, fs, EncodingUtils.DEFAULT_CHARSET);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fs != null) {
-                try {
-                    fs.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        FileUtils.writeStringToFile(file, text, charset);
+    }
+
+
+    /**
+     * 将制定内容写入一个文件，默认UTF-8编码
+     *
+     * @param path      文件路径
+     * @param lines     文件内容
+     * @param overwrite 是否覆盖
+     * @throws IOException 文件不能写入
+     */
+    public static void writeFileAllLines(String path, List<String> lines, boolean overwrite) throws IOException {
+        writeFileAllLines(path, lines, EncodingUtils.DEFAULT_CHARSET, overwrite);
     }
 
     /**
      * 将制定内容写入一个文件，默认UTF-8编码
      *
-     * @param path
-     * @param lines
-     * @param overwrite
+     * @param path      文件路径
+     * @param lines     文件内容
+     * @param charset   编码方式
+     * @param overwrite 是否覆盖
+     * @throws IOException 文件不能写入
      */
-    public static void writeFileAllLine(String path, List<String> lines, boolean overwrite) {
+    public static void writeFileAllLines(String path, List<String> lines, Charset charset, boolean overwrite) throws IOException {
         File file = new File(path);
-        boolean exists = file.exists();
         if (file.exists()) {
             if (!overwrite) {
                 return;
@@ -289,32 +307,18 @@ public class IOUtils {
             }
         }
 
-        FileOutputStream fs = null;
-        try {
-            fs = new FileOutputStream(file);
-            org.apache.commons.io.IOUtils.writeLines(lines, null, fs, EncodingUtils.DEFAULT_CHARSET);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fs != null) {
-                try {
-                    fs.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        FileUtils.writeLines(file, charset.name(), lines);
     }
 
     /**
      * 将制定内容追加到一个文件，如果文件不存在，创建文件
      *
-     * @param path
-     * @param lines
+     * @param path    文件路径
+     * @param charset 文件编码
+     * @param lines   文件内容
+     * @throws IOException 文件不能写入
      */
-    public static void appendFile(String path, String... lines) {
+    public static void appendFile(String path, Charset charset, String... lines) throws IOException {
         File file = new File(path);
         boolean exists = file.exists();
         if (!exists) {
@@ -322,63 +326,28 @@ public class IOUtils {
             createDirectory(directory);
         }
 
-        FileOutputStream fs = null;
-        try {
-            if (!file.exists())
-                file.createNewFile();
-            fs = new FileOutputStream(file, true);
-            org.apache.commons.io.IOUtils.writeLines(Arrays.asList(lines), null, fs, EncodingUtils.DEFAULT_CHARSET);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fs != null) {
-                try {
-                    fs.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        FileUtils.writeLines(file, charset.name(), Arrays.asList(lines), true);
     }
 
     /**
-     * 读取文件
+     * 读取文件byte[]
      *
-     * @param path
-     * @return
+     * @param path 文件路径
+     * @return 文件内容byte[]
+     * @throws IOException 文件不存在或不能读取
      */
-    public static byte[] readeFile(String path) {
-        byte[] result = null;
-        File f = new File(path);
-        if (f.isFile() && f.canRead()) {
-            FileInputStream stream = null;
-            try {
-                stream = new FileInputStream(f);
-                result = org.apache.commons.io.IOUtils.toByteArray(stream);
-            } catch (IOException e) {
-                e.printStackTrace();
-                if (stream != null) {
-                    try {
-                        stream.close();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-        }
-        return result;
+    public static byte[] readeFile(String path) throws IOException {
+        return FileUtils.readFileToByteArray(new File(path));
     }
 
     /**
      * 写入文件
-     *
-     * @param path
-     * @param data
-     * @param overwrite
+     * @param path 文件路径
+     * @param data 文件内容byte[]
+     * @param overwrite 是否覆盖
+     * @throws IOException 文件不能写入
      */
-    public static void writeFile(String path, byte[] data, boolean overwrite) {
+    public static void writeFile(String path, byte[] data, boolean overwrite) throws IOException {
         File file = new File(path);
         if (file.exists()) {
             if (overwrite) {
@@ -390,23 +359,6 @@ public class IOUtils {
                 parent.mkdir();
             }
         }
-
-        FileOutputStream fs = null;
-        try {
-            fs = new FileOutputStream(file);
-            org.apache.commons.io.IOUtils.write(data, fs);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fs != null) {
-                try {
-                    fs.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        FileUtils.writeByteArrayToFile(file, data);
     }
 }

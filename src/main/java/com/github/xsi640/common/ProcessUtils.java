@@ -7,27 +7,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
+/**
+ * 进程相关工具类
+ */
 public class ProcessUtils {
 
     /**
-     * 开始一个进程
-     * @param command
+     * 开始一个进程，运行指定的命令
+     *
+     * @param command 命令
+     * @throws IOException 发送IO错误
      */
-    public static void start(String... command) {
-        ProcessBuilder pb = new ProcessBuilder(command);
-        try {
-            pb.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void start(String... command) throws IOException {
+        start(command, false);
     }
 
     /**
      * 开始一个进程，并且等待进程结束
-     * @param command
-     * @param waitFor
+     *
+     * @param command 命令
+     * @param waitFor 是否等待进程执行完成
+     * @throws IOException 发送IO错误
      */
-    public static void start(String[] command, boolean waitFor) {
+    public static void start(String[] command, boolean waitFor) throws IOException {
         Process p = null;
         try {
             ProcessBuilder pb = new ProcessBuilder(command);
@@ -35,8 +37,6 @@ public class ProcessUtils {
             if (waitFor) {
                 p.waitFor();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -48,9 +48,10 @@ public class ProcessUtils {
 
     /**
      * 开始一个进程，等待进程结束后，返回结果
-     * @param command
-     * @param charset
-     * @return
+     *
+     * @param command 命令
+     * @param charset 编码方式
+     * @return 命令执行的结果
      */
     public static String startWithResult(String[] command, Charset charset) {
         StringBuilder sb = new StringBuilder();
