@@ -9,11 +9,11 @@ import java.util.UUID;
 public class TypeParse {
 
     /**
-     * 字符串转换成Int，转换失败会返回默认值
+     * 字符串转换成Integer，转换失败会返回默认值
      *
      * @param str        字符串
      * @param defaultVal 默认值
-     * @return
+     * @return 转换的Integer
      */
     public static Integer toInt(String str, Integer defaultVal) {
         Integer result = defaultVal;
@@ -29,7 +29,7 @@ public class TypeParse {
      * 字符串转换成Int，转换失败会返回0
      *
      * @param str 字符串
-     * @return
+     * @return 转换的Integer
      */
     public static Integer toInt(String str) {
         return toInt(str, 0);
@@ -37,8 +37,9 @@ public class TypeParse {
 
     /**
      * Object转换成Int，转换失败会返回0
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Integer
      */
     public static Integer toInt(Object obj) {
         return toInt(obj, 0);
@@ -46,9 +47,10 @@ public class TypeParse {
 
     /**
      * Object转换成Int，转换失败会返回默认值
-     * @param obj 字符串
+     *
+     * @param obj        字符串
      * @param defaultVal 默认值
-     * @return
+     * @return 转换的Integer
      */
     public static Integer toInt(Object obj, Integer defaultVal) {
         return toInt(obj.toString(), defaultVal);
@@ -56,9 +58,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Long，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Long
      */
     public static Long toLong(String str, Long defaultVal) {
         Long result = defaultVal;
@@ -72,8 +75,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Long，转换失败会返回0L
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Long
      */
     public static Long toLong(String str) {
         return toLong(str, 0l);
@@ -81,8 +85,9 @@ public class TypeParse {
 
     /**
      * Object转换成Long，转换失败会返回0L
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Long
      */
     public static Long toLong(Object obj) {
         return toLong(obj, 0l);
@@ -90,9 +95,10 @@ public class TypeParse {
 
     /**
      * Object转换成Long，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Long
      */
     public static Long toLong(Object obj, Long defaultVal) {
         return toLong(obj.toString(), defaultVal);
@@ -100,9 +106,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Boolean，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Boolean
      */
     public static Boolean toBoolean(String str, Boolean defaultVal) {
         Boolean result = defaultVal;
@@ -116,8 +123,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Boolean，转换失败会返回false
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Boolean
      */
     public static Boolean toBoolean(String str) {
         return toBoolean(str, false);
@@ -125,8 +133,9 @@ public class TypeParse {
 
     /**
      * Object转换成Boolean，转换失败会返回false
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Boolean
      */
     public static Boolean toBoolean(Object obj) {
         return toBoolean(obj, false);
@@ -134,9 +143,10 @@ public class TypeParse {
 
     /**
      * Object转换成Boolean，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Boolean
      */
     public static Boolean toBoolean(Object obj, Boolean defaultVal) {
         return toBoolean(obj.toString(), defaultVal);
@@ -144,9 +154,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Float，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Float
      */
     public static Float toFloat(String str, Float defaultVal) {
         Float result = defaultVal;
@@ -160,8 +171,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Boolean，转换失败会返回0f
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Float
      */
     public static Float toFloat(String str) {
         return toFloat(str, 0f);
@@ -169,8 +181,9 @@ public class TypeParse {
 
     /**
      * Object转换成Boolean，转换失败会返回0f
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Float
      */
     public static Float toFloat(Object obj) {
         return toFloat(obj, 0f);
@@ -178,9 +191,10 @@ public class TypeParse {
 
     /**
      * Object转换成Boolean，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Float
      */
     public static Float toFloat(Object obj, Float defaultVal) {
         return toFloat(obj.toString(), defaultVal);
@@ -188,9 +202,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Double，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Double
      */
     public static Double toDouble(String str, Double defaultVal) {
         Double result = defaultVal;
@@ -204,8 +219,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Double，转换失败会返回0d
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Double
      */
     public static Double toDouble(String str) {
         return toDouble(str, 0d);
@@ -213,9 +229,10 @@ public class TypeParse {
 
     /**
      * Object转换成Double，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Double
      */
     public static Double toDouble(Object obj, Double defaultVal) {
         return toDouble(obj.toString(), defaultVal);
@@ -223,8 +240,9 @@ public class TypeParse {
 
     /**
      * Object转换成Double，转换失败会返回0d
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Double
      */
     public static Double toDouble(Object obj) {
         return toDouble(obj, 0d);
@@ -232,9 +250,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Short，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Short
      */
     public static Short toShort(String str, Short defaultVal) {
         Short result = defaultVal;
@@ -248,8 +267,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Short，转换失败会返回0
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Short
      */
     public static Short toShort(String str) {
         return toShort(str, (short) 0);
@@ -257,9 +277,10 @@ public class TypeParse {
 
     /**
      * Object转换成Short，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Short
      */
     public static Short toShort(Object obj, Short defaultVal) {
         return toShort(obj.toString(), defaultVal);
@@ -267,8 +288,9 @@ public class TypeParse {
 
     /**
      * Object转换成Short，转换失败会返回0
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Short
      */
     public static Short toShort(Object obj) {
         return toShort(obj, (short) 0);
@@ -276,9 +298,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Byte，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的Byte
      */
     public static Byte toByte(String str, Byte defaultVal) {
         Byte result = defaultVal;
@@ -292,8 +315,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Byte，转换失败会返回0
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换的Byte
      */
     public static Byte toByte(String str) {
         return toByte(str, (byte) 0);
@@ -301,9 +325,10 @@ public class TypeParse {
 
     /**
      * Object转换成Byte，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的Byte
      */
     public static Byte toByte(Object obj, Byte defaultVal) {
         return toByte(obj.toString(), defaultVal);
@@ -311,8 +336,9 @@ public class TypeParse {
 
     /**
      * Object转换成Byte，转换失败会返回0
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的Byte
      */
     public static Byte toByte(Object obj) {
         return toByte(obj, (byte) 0);
@@ -320,9 +346,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成UUID，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换的UUID
      */
     public static UUID toUUID(String str, UUID defaultVal) {
         UUID result = defaultVal;
@@ -335,9 +362,10 @@ public class TypeParse {
     }
 
     /**
-     * 字符串转换成UUID，转换失败会返回UUID_EMPTY
-     * @param str
-     * @return
+     * 字符串转换成UUID，转换失败会返回 00000000-0000-0000-0000-000000000000
+     *
+     * @param str 要转换的字符串
+     * @return 转换的UUID
      */
     public static UUID toUUID(String str) {
         return toUUID(str, UUIDUtils.UUID_EMPTY);
@@ -345,9 +373,10 @@ public class TypeParse {
 
     /**
      * Object转换成UUID，转换失败会返回默认值
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换的UUID
      */
     public static UUID toUUID(Object obj, UUID defaultVal) {
         return toUUID(obj.toString(), defaultVal);
@@ -355,8 +384,9 @@ public class TypeParse {
 
     /**
      * Object转换成UUID，转换失败会返回UUID_EMPTY
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换的UUID
      */
     public static UUID toUUID(Object obj) {
         return toUUID(obj, UUIDUtils.UUID_EMPTY);
@@ -364,10 +394,11 @@ public class TypeParse {
 
     /**
      * 字符串转换成Date，转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @param pattern 日期时间格式
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @param pattern    日期时间格式，如果为空，使用默认格式：yyyy-MM-dd HH:mm:ss
+     * @return 转换后的Date
      */
     public static Date toDate(String str, Date defaultVal, String pattern) {
         return DateUtils.formString(str, defaultVal, pattern);
@@ -375,9 +406,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Date（日期格式：yyyy-MM-dd HH:mm:ss），转换失败会返回默认值
-     * @param str
-     * @param defaultVal
-     * @return
+     *
+     * @param str        要转换的字符串
+     * @param defaultVal 默认值
+     * @return 转换后的Date
      */
     public static Date toDate(String str, Date defaultVal) {
         return toDate(str, defaultVal, null);
@@ -385,8 +417,9 @@ public class TypeParse {
 
     /**
      * 字符串转换成Date（日期格式：yyyy-MM-dd HH:mm:ss），转换失败会返回1900-1-1
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换后的Date
      */
     public static Date toDate(String str) {
         return toDate(str, DateUtils.Date_EMPTY);
@@ -394,9 +427,10 @@ public class TypeParse {
 
     /**
      * 字符串转换成Date，转换失败返回1900-1-1
-     * @param str
-     * @param pattern
-     * @return
+     *
+     * @param str     要转换的字符串
+     * @param pattern 日期时间格式，如果为空，使用默认格式：yyyy-MM-dd HH:mm:ss
+     * @return 转换后的Date
      */
     public static Date toDate(String str, String pattern) {
         return DateUtils.formString(str, DateUtils.Date_EMPTY, pattern);
@@ -404,10 +438,11 @@ public class TypeParse {
 
     /**
      * Object转换成Date，转换失败返回默认值
-     * @param obj
-     * @param defaultVal
-     * @param pattern 日期时间格式
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @param pattern    日期时间格式，如果为空，使用默认格式：yyyy-MM-dd HH:mm:ss
+     * @return 转换后的Date
      */
     public static Date toDate(Object obj, Date defaultVal, String pattern) {
         return toDate(obj.toString(), defaultVal, pattern);
@@ -415,9 +450,10 @@ public class TypeParse {
 
     /**
      * Object转换成Date（日期格式：yyyy-MM-dd HH:mm:ss），转换失败返回1900-1-1
-     * @param obj
-     * @param defaultVal
-     * @return
+     *
+     * @param obj        要转换的对象
+     * @param defaultVal 默认值
+     * @return 转换后的Date
      */
     public static Date toDate(Object obj, Date defaultVal) {
         return toDate(obj, defaultVal);
@@ -425,8 +461,9 @@ public class TypeParse {
 
     /**
      * Object转换成Date（日期格式：yyyy-MM-dd HH:mm:ss），转换失败返回1900-1-1
-     * @param obj
-     * @return
+     *
+     * @param obj 要转换的对象
+     * @return 转换后的Date
      */
     public static Date toDate(Object obj) {
         return toDate(obj, DateUtils.Date_EMPTY);

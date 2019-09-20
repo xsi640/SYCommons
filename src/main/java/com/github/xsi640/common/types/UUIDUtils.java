@@ -17,8 +17,9 @@ public class UUIDUtils {
 
     /**
      * 字符串转UUID，字符串带连接符
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换后的UUID
      */
     public static UUID fromStringWithHyphens(String str) {
         return UUID.fromString(str);
@@ -26,8 +27,9 @@ public class UUIDUtils {
 
     /**
      * 字符串转UUID，字符串不带连接符
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换后的UUID
      */
     public static UUID fromStringWhitoutHyphens(String str) {
         if (str.length() != 32) {
@@ -54,8 +56,9 @@ public class UUIDUtils {
 
     /**
      * 字符串转UUID，（字段判断连接符）
-     * @param str
-     * @return
+     *
+     * @param str 要转换的字符串
+     * @return 转换后的UUID
      */
     public static UUID fromString(String str) {
         if (str.indexOf('-') >= 0) {
@@ -67,8 +70,9 @@ public class UUIDUtils {
 
     /**
      * UUID转字符串（带连接符）
-     * @param uuid
-     * @return
+     *
+     * @param uuid 要转换的UUID
+     * @return 转换后的字符串
      */
     public static String toString(UUID uuid) {
         return uuid.toString();
@@ -76,8 +80,9 @@ public class UUIDUtils {
 
     /**
      * UUID转字符串（不带连接符）
-     * @param uuid
-     * @return
+     *
+     * @param uuid 要转换的UUID
+     * @return 转换后的字符串
      */
     public static String toStringWhitoutHyphens(UUID uuid) {
         long msb = uuid.getMostSignificantBits();
@@ -88,8 +93,9 @@ public class UUIDUtils {
 
     /**
      * byte[]转UUID
-     * @param data
-     * @return
+     *
+     * @param data 要转换的byte[]
+     * @return 转换后的UUID
      */
     public static UUID fromByte(byte[] data) {
         if (data.length != 16) {
@@ -108,8 +114,9 @@ public class UUIDUtils {
 
     /**
      * UUID转byte[]
-     * @param uuid
-     * @return
+     *
+     * @param uuid 要转换的UUID
+     * @return 转换后的byte[]
      */
     public static byte[] toByte(UUID uuid) {
         ByteArrayOutputStream ba = new ByteArrayOutputStream(16);

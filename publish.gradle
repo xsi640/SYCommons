@@ -12,9 +12,9 @@ publishing {
     // 定义发布什么
     publications {
         mavenJava(MavenPublication) {
-            groupId = "com.github.xsi640"
-            artifactId = "SYCommons"
-            version = project.version
+//            groupId = "com.github.xsi640"
+//            artifactId = "SYCommons"
+//            version = project.version
             // groupId,artifactId,version，如果不定义，则会按照以上默认值执行
             from components.java
             artifact sourcesJar

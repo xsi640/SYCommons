@@ -38,6 +38,7 @@ public class Rfc2898DeriveBytes {
      *
      * @param password   The password used to derive the key.
      * @param iterations The number of iterations for the operation.
+     * @param saltSize salt size
      * @throws NoSuchAlgorithmException     HmacSHA1 algorithm cannot be found.
      * @throws InvalidKeyException          Salt must be 8 bytes or more. -or- Password cannot be null.
      * @throws UnsupportedEncodingException the encoding is unsupported.

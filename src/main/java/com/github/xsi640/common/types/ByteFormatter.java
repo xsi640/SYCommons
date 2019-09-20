@@ -3,7 +3,6 @@ package com.github.xsi640.common.types;
 /**
  * 字节大小显示方式
  * @author Yang
- *
  */
 public class ByteFormatter {
 
@@ -22,8 +21,8 @@ public class ByteFormatter {
 
 	/**
 	 * 将字节大小转换成字符串格式(12B,12KB,12GB,12TB,12PB)
-	 * @param size
-	 * @return
+	 * @param size 字节数
+	 * @return 字符串格式显示大小
 	 */
 	public static String toString(long size) {
 		String result;
@@ -45,9 +44,9 @@ public class ByteFormatter {
 
 	/**
 	 * 根据大小格式，将字节大小转换成字符串格式(12B,12KB,12GB,12TB,12PB)
-	 * @param size
-	 * @param type
-	 * @return
+	 * @param size 字节数
+	 * @param type 显示的类型
+	 * @return 字符串方式显示大小
 	 */
 	public static String toString(long size, ESizeType type) {
 		String result = "";
@@ -78,8 +77,8 @@ public class ByteFormatter {
 
 	/**
 	 * 根据字节大小获取大小的枚举（KB,MB,GB,TB,PB）
-	 * @param size
-	 * @return
+	 * @param size 字节数
+	 * @return 合适的大小类型
 	 */
 	public static ESizeType getSizeType(long size) {
 		ESizeType result;
@@ -99,6 +98,9 @@ public class ByteFormatter {
 		return result;
 	}
 
+	/**
+	 * 大小类型
+	 */
 	public enum ESizeType {
 		B, KB, MB, GB, TB, PB
 	}

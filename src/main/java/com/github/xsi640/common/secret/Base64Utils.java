@@ -14,21 +14,21 @@ import org.apache.commons.lang3.StringUtils;
 public class Base64Utils {
 
     /**
-     * 将Base64字符串转换为指定的字符串
+     * 将Base64字符串转换为指定的字符串，默认使用UTF-8编码
      *
-     * @param s
-     * @return
+     * @param s 要转换的Base64字符串
+     * @return 转换后的字符串
      */
     public static String fromBase64(String s) {
         return fromBase64(s, EncodingUtils.DEFAULT_CHARSET);
     }
 
     /**
-     * 将Base64字符串转换为指定的字符串
+     * 使用指定编码，将Base64字符串转换为指定的字符串
      *
-     * @param s
-     * @param charset
-     * @return
+     * @param s       要转换的Base64字符串
+     * @param charset 转换的编码
+     * @return 转换后的字符串
      */
     public static String fromBase64(String s, Charset charset) {
         if (StringUtils.isEmpty(s))
@@ -39,8 +39,8 @@ public class Base64Utils {
     /**
      * 将Base64二进制数组转换为指定的二进制数组
      *
-     * @param byteArrays
-     * @return
+     * @param byteArrays Base64二进制数组
+     * @return 转换后的二进制数组
      */
     public static byte[] fromBase64ByteArray(byte[] byteArrays) {
         if (byteArrays == null)
@@ -52,21 +52,21 @@ public class Base64Utils {
     }
 
     /**
-     * 将指定的字符串转为Base64字符串
+     * 将指定的字符串转为Base64字符串，使用UTF-8编码
      *
-     * @param s
-     * @return
+     * @param s 要转换的字符串
+     * @return 转换后的Base64字符串
      */
     public static String toBase64(String s) {
         return toBase64(s, EncodingUtils.DEFAULT_CHARSET);
     }
 
     /**
-     * 将指定的字符串转为Base64字符串
+     * 使用指定编码，将指定的字符串转为Base64字符串
      *
-     * @param s
-     * @param charset
-     * @return
+     * @param s       要转换的字符串
+     * @param charset 转换的编码
+     * @return 转换后的Base64字符串
      */
     public static String toBase64(String s, Charset charset) {
         if (StringUtils.isEmpty(s))
@@ -75,10 +75,10 @@ public class Base64Utils {
     }
 
     /**
-     * 将指定的字符串转为Base64字符串
+     * 将指定的byte[]转为Base64字符串，使用UTF-8方式编码
      *
-     * @param data
-     * @return
+     * @param data 要转换的byte[]
+     * @return 转换后的Base64字符串
      */
     public static String toBase64(byte[] data) {
         if (data == null)
@@ -89,9 +89,9 @@ public class Base64Utils {
     /**
      * 将指定的字符串转为Base64字符串
      *
-     * @param data
-     * @param charset
-     * @return
+     * @param data    要转换的byte[]
+     * @param charset 转换的编码
+     * @return 转换后的Base64字符串
      */
     public static String toBase64(byte[] data, Charset charset) {
         if (data == null)
@@ -102,8 +102,8 @@ public class Base64Utils {
     /**
      * 将指定的二进制数组转为Base64二进制数组
      *
-     * @param byteArrays
-     * @return
+     * @param byteArrays 要转换的byte[]
+     * @return 转换后的Base64二进制数组
      */
     public static byte[] toBase64ByteArray(byte[] byteArrays) {
         if (byteArrays == null)
