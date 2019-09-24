@@ -2,10 +2,13 @@ package com.github.xsi640.common;
 
 import com.github.xsi640.common.encode.EncodingUtils;
 
+import java.awt.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 /**
  * 进程相关工具类
@@ -83,5 +86,23 @@ public class ProcessUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 使用当前操作系统默认进程打开一个文件
+     *
+     * @param path 文件路径
+     */
+    public static void openFile(String path) throws IOException {
+        if (OSUtils.isWindows()) {
+            Runtime.getRuntime().exec(new String[]{"rundll32", "url.dll,FileProtocolHandler", path});
+        } else if (OSUtils.isLinux() || OSUtils.isMacOS()) {
+            Runtime.getRuntime().exec(new String[]{"/usr/bin/open", path});
+        } else {
+            // Unknown OS, try with desktop
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(new File(path));
+            }
+        }
     }
 }
