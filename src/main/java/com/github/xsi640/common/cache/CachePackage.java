@@ -16,19 +16,35 @@ public class CachePackage<TKey, TValue> {
 		this.value = value;
 		this.lastAccessTime = System.currentTimeMillis();
 	}
-	
+
+	/**
+	 * 获取缓存Key
+	 * @return Key
+	 */
 	public TKey getKey() {
 		return key;
 	}
 
+	/**
+	 * 设置缓存Key
+	 * @param key Key
+	 */
 	public void setKey(TKey key) {
 		this.key = key;
 	}
 
+	/**
+	 * 获取缓存的值
+	 * @return 缓存的值
+	 */
 	public TValue getValue() {
 		return value;
 	}
 
+	/**
+	 * 设置缓存的值
+	 * @param value 缓存的值
+	 */
 	public void setValue(TValue value) {
 		this.value = value;
 	}

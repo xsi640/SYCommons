@@ -92,6 +92,7 @@ public class ProcessUtils {
      * 使用当前操作系统默认进程打开一个文件
      *
      * @param path 文件路径
+     * @throws IOException 如果发生IO错误
      */
     public static void openFile(String path) throws IOException {
         if (OSUtils.isWindows()) {

@@ -29,8 +29,8 @@ public final class Strings {
      *         .with("lastname", "Doe")
      *         .build();
      * </pre>
-     *
-     * @return The formatted string.
+     * @param string 要格式化的字符串
+     * @return 格式化后的字符串
      */
     public static Builder format(String string) {
         return new Builder(string);
