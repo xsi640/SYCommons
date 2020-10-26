@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -33,7 +35,7 @@ public class HttpUtils {
     private final static String DEFAULT_USER_AGENT = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
     private static Map<String, String> MIME_FILE_TYPE = new HashMap<>();
 
-    public static void download(String url, NameValueCollection nvc, String method, String path) {
+    public static void download(String url, NameValueCollection nvc, String method, String path, HttpProxy proxy) {
         Method m = Method.GET;
         if ("GET".equalsIgnoreCase(method)) {
             m = Method.GET;
@@ -48,7 +50,7 @@ public class HttpUtils {
         BufferedOutputStream bufferedOutputStream = null;
 
         try {
-            conn = getConnection(url, nvc, m);
+            conn = getConnection(url, nvc, m, proxy);
             inputStream = getInputStream(conn, nvc, m);
             bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(path));
             byte[] buffer = new byte[RESPONSE_STREAM_MAX_LENGTH];
@@ -82,7 +84,7 @@ public class HttpUtils {
         }
     }
 
-    public static String getContent(String url, NameValueCollection nvc, String method) {
+    public static String getContent(String url, NameValueCollection nvc, String method, HttpProxy proxy) {
         Method m = Method.GET;
         if ("GET".equalsIgnoreCase(method)) {
             m = Method.GET;
@@ -98,7 +100,7 @@ public class HttpUtils {
         String result = "";
 
         try {
-            conn = getConnection(url, nvc, m);
+            conn = getConnection(url, nvc, m, proxy);
             inputStream = getInputStream(conn, nvc, m);
             bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuffer sb = new StringBuffer();
@@ -206,7 +208,7 @@ public class HttpUtils {
         }
     }
 
-    public static HttpURLConnection getConnection(String url, NameValueCollection nvc, Method method)
+    public static HttpURLConnection getConnection(String url, NameValueCollection nvc, Method method, HttpProxy proxy)
             throws IOException {
         HttpURLConnection result = null;
         if (method == Method.POST) {
@@ -214,7 +216,10 @@ public class HttpUtils {
             if (u.getProtocol().equalsIgnoreCase("https")) {
                 trustHttpsEveryone();
             }
-            result = (HttpURLConnection) u.openConnection();
+            if (proxy == null)
+                result = (HttpURLConnection) u.openConnection();
+            else
+                result = (HttpURLConnection) u.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy.getHost(), proxy.getPort())));
             result.setRequestMethod("POST");
         } else {
             URL u = new URL(getUrl(url, nvc));
@@ -310,6 +315,32 @@ public class HttpUtils {
         if (MIME_FILE_TYPE.containsKey(extName))
             return MIME_FILE_TYPE.get(extName);
         return "";
+    }
+
+    public class HttpProxy {
+        private String host;
+        private int port;
+
+        public HttpProxy(String host, int port) {
+            this.host = host;
+            this.port = port;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
     }
 
     static {
