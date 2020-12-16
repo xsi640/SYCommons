@@ -223,7 +223,10 @@ public class HttpUtils {
             result.setRequestMethod("POST");
         } else {
             URL u = new URL(getUrl(url, nvc));
-            result = (HttpURLConnection) u.openConnection();
+            if (proxy == null)
+                result = (HttpURLConnection) u.openConnection();
+            else
+                result = (HttpURLConnection) u.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy.getHost(), proxy.getPort())));
             result.setRequestMethod("GET");
         }
         result.setRequestProperty("Content-Type", DEFAULT_CONTENT_TYPE);
@@ -250,10 +253,14 @@ public class HttpUtils {
         return conn.getInputStream();
     }
 
-    public static String getRedirectUrl(String url) throws IOException {
+    public static String getRedirectUrl(String url, HttpProxy proxy) throws IOException {
         HttpURLConnection.setFollowRedirects(false);
         URL u = new URL(url);
-        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        HttpURLConnection conn;
+        if (proxy == null)
+            conn = (HttpURLConnection) u.openConnection();
+        else
+            conn = (HttpURLConnection) u.openConnection(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy.getHost(), proxy.getPort())));
         if (u.getProtocol().equalsIgnoreCase("https")) {
             trustHttpsEveryone();
         }
